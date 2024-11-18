@@ -5,15 +5,15 @@ import styles from './FilmesEmCartaz.module.css';
 import { FaStar, FaStarHalfAlt, FaSearch } from 'react-icons/fa';
 import Image from 'next/image';
 
-import Gado1 from "@/assets/BannersFilmes/gado1.jpg";
-import Gado2 from "@/assets/BannersFilmes/gado2.jpg";
-import Gado3 from "@/assets/BannersFilmes/gado3.jpg";
-import Gado4 from "@/assets/BannersFilmes/gado4.jpg";
-import Gado5 from "@/assets/BannersFilmes/gado5.jpg";
-import Gado6 from "@/assets/BannersFilmes/gado6.jpg";
-import Gado7 from "@/assets/BannersFilmes/gado7.jpeg";
-import Gado8 from "@/assets/BannersFilmes/gado8.jpg";
-import Gado9 from "@/assets/BannersFilmes/gado9.jpg";
+import Gado1 from "@/assets/Lotes/gado1.jpg";
+import Gado2 from "@/assets/Lotes/gado2.jpg";
+import Gado3 from "@/assets/Lotes/gado3.jpg";
+import Gado4 from "@/assets/Lotes/gado4.jpg";
+import Gado5 from "@/assets/Lotes/gado5.jpg";
+import Gado6 from "@/assets/Lotes/gado6.jpg";
+import Gado7 from "@/assets/Lotes/gado7.jpeg";
+import Gado8 from "@/assets/Lotes/gado8.jpg";
+import Gado9 from "@/assets/Lotes/gado9.jpg";
 
 
 const listaBanners = [
@@ -21,7 +21,7 @@ const listaBanners = [
     nome: "Lote 1",
     Cidade: "Florianópolis",
     desc: "10 cabeças de gado disponíveis para compra em Florianópolis, SC",
-    anunciante: "Joãozinho",
+    anunciante: "Maria Antonieta",
     valor: "R$50.000",
     indice_qualidade: "2.5",
     imagem: Gado1
@@ -39,7 +39,7 @@ const listaBanners = [
     nome: "Lote 3",
     Cidade: "Viamão",
     desc: "8 cabeças de gado magro e dois bezerros disponíveis para compra em Viamão, RS",
-    anunciante: "Luiz",
+    anunciante: "Meryl Streep",
     valor: "R$45.000",
     indice_qualidade: "4.5",
     imagem: Gado3
@@ -56,7 +56,7 @@ const listaBanners = [
   {
     nome: "Lote 5",
     Cidade: "Canasvieiras",
-    desc: "15 cabeças de gado disponíveis para compra em Imbé, SC",
+    desc: "15 cabeças de gado disponíveis para compra em Canasvieiras, SC",
     anunciante: "Angelo Oliveira",
     valor: "R$80.000",
     indice_qualidade: "4",
@@ -65,7 +65,7 @@ const listaBanners = [
   {
     nome: "Lote 6",
     Cidade: "Garopaba",
-    desc: "10 cabeças de gado disponíveis para compra em Bento Gonçalves, SC",
+    desc: "10 cabeças de gado disponíveis para compra em Garopaba, SC",
     anunciante: "Miguel Dutra",
     valor: "R$55.000",
     indice_qualidade: "5",

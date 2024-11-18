@@ -1,46 +1,59 @@
-import FreddyImage from "@/assets/Freddy.png";
-import NekoImage from "@/assets/Neko.png";
-import MichaelImage from "@/assets/Michael.png";
-import LeatherfaceImage from "@/assets/Leatherface.png";
-import PennywiseImage from "@/assets/Pennywise.png";
-import JasonImage from "@/assets/Jason.png";
-import GleysombrioImage from "@/assets/Gleysombrio.png";
+import AnaImage from "@/assets/Ana.png";
+import AngeloImage from "@/assets/Angelo.png";
+import AugustoImage from "@/assets/Augusto.png";
+import BrunoImage from "@/assets/Bruno.png";
+import LucianaImage from "@/assets/Luciana.png";
+import MariaImage from "@/assets/Maria.png";
+import MerylImage from "@/assets/Meryl.png";
+import MiguelImage from "@/assets/Miguel.png";
+import NathanImage from "@/assets/Nathan.png";
+
 
 const icones = [
   {
-    nome: "Freddy Krueger",
-    descricao: "Freddy Krueger, criado por Wes Craven para \"A Nightmare on Elm Street\", é um icônico assassino em série que ataca em pesadelos. Ele usa uma luva com lâminas afiadas e tem uma aparência marcante: chapéu fedora, suéter listrado e rosto queimado. Misturando terror psicológico e sobrenatural, Freddy se tornou memorável.",
-    imagem: FreddyImage
+    nome: "Ana",
+    descricao: "Ana é uma estudante de agronomia e decidiu entrar para a plataforma pois tem percebido que há cabeças de gado demais na fazenda de sua família e está ficando muito difícil administrá-las sem que algumas venham a falecer.",
+    imagem: AnaImage
   },
   {
-    nome: "Neko Robin",
-    descricao: "Neko Robin é uma entidade sobrenatural, sombria e enigmática, que se alimenta do medo e da ansiedade dos candidatos que buscam uma vaga. Durante o processo seletivo, ele espreita nas sombras, observando silenciosamente cada movimento, enquanto coleciona as almas dos que ousam tentar. No entanto, os escolhidos não estão destinados à escuridão eterna, mas sim à salinha, onde serão movidos pelo irresistível café grátis.",
-    imagem: NekoImage
+    nome: "Angelo",
+    descricao: "Angelo tem mais interesse no dinheiro advindo da venda de gado do que efetivamente da administração das fazendas de seu avô.",
+    imagem: AngeloImage
   },
   {
-    nome: "Michael Myers",
-    descricao: "Michael Myers é o vilão da franquia \"Halloween\", criado por John Carpenter. Um assassino silencioso e implacável, ele usa uma máscara branca e é conhecido por perseguir e matar suas vítimas, especialmente na noite de Halloween. Representa o mal puro, agindo sem motivo claro, tornando-se um ícone do terror.",
-    imagem: MichaelImage
+    nome: "Augusto",
+    descricao: "Augusto gosta muito dos animais, porém está com muitos bois reprodutores na fazenda e precisa vender alguns.",
+    imagem: AugustoImage
   },
   {
-    nome: "Leatherface",
-    descricao: "Leatherface é um homem corpulento que usa uma máscara de pele humana e carrega uma serra elétrica, tornando-o uma figura aterrorizante. Ele vive em uma fazenda isolada com sua família canibal, os Sawyer, que sequestram e matam viajantes. Mentalmente instável, age de forma primitiva e violenta, sendo frequentemente manipulado por outros membros da família.",
-    imagem: LeatherfaceImage
+    nome: "Bruno",
+    descricao: "Bruno não está conseguindo conciliar os bois de porte magro junto com os recém-chegados bezerros na fazenda de seu avô, por isso pretende vender algumas cabeças.",
+    imagem: BrunoImage
   },
   {
-    nome: "Pennywise",
-    descricao: "Pennywise é uma entidade cósmica que se alimenta do medo e surge a cada 27 anos em Derry. Ele assume a forma de um palhaço para atrair vítimas, especialmente crianças, e usa ilusões para explorar seus piores medos. Sádico e manipulador, sua verdadeira forma é uma força maligna além da compreensão humana.",
-    imagem: PennywiseImage
+    nome: "Luciana",
+    descricao: "Luciana entrou para a plataforma para vender algumas cabeças ocasionalmente, a fim de não sobrecarregar os trabalhadores que contratou para cuidar da fazenda de sua mãe.",
+    imagem: LucianaImage
   },
   {
-    nome: "Jason",
-    descricao: "Jason Voorhees, da série \"Friday the 13th\", é um assassino icônico criado por Victor Miller. Após se afogar no Lago Crystal, busca vingança usando uma máscara de hóquei e um facão para matar campistas. Sua figura se tornou um símbolo do gênero slasher e um ícone da cultura pop.",
-    imagem: JasonImage
+    nome: "Maria",
+    descricao: "Maria se envolveu com jogos de azar e precisa com urgência de dinheiro para pagar os agiotas que pediu dinheiro emprestado, por isso está vendendo as últimas espécies de sua fazenda.",
+    imagem: MariaImage
   },
   {
-    nome: "Gleysombrio",
-    descricao: "Gleysombrio é uma entidade sobrenatural que assombra becos escuros de pequenas cidades. Descrito como uma figura encapuzada com olhos incandescentes, ele hipnotiza suas vítimas, movendo-se em silêncio perturbador. Gleysombrio caça aqueles que se aventuram sozinhos à noite, transformando medos em realidade. Ele personifica a escuridão, alimentando-se da vulnerabilidade humana e deixando pavor em seu rastro.",
-    imagem: GleysombrioImage
+    nome: "Meryl",
+    descricao: "Meryl busca vender algumas cabeças de gado magro e alguns bezerros para conseguir comprar um apartamento na capital do Estado.",
+    imagem: MerylImage
+  },
+  {
+    nome: "Miguel",
+    descricao: "Miguel está vendendo algumas cabeças de gado da fazenda de seu tataravô com muita dor no coração, pois tem muito apego pelos animais, porém precisa do dinheiro para melhorar as condições dos animais.",
+    imagem: MiguelImage
+  },
+  {
+    nome: "Nathan",
+    descricao: "Nathan deseja testar a plataforma e decidiu vender apenas um boi reprodutor para garantir um pouco de capital e não sair no prejuízo.",
+    imagem: NathanImage
   }
 ];
 

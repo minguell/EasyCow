@@ -33,7 +33,7 @@ const IconesTerror = () => {
   return (
     <section id="assassinos" ref={assassinosRef}>
       <div className={styles.container}>
-        <h1 className={styles.title}>OS ICONES DO TERROR</h1>
+        <h1 className={styles.title}>USUARIOS DA PLATAFORMA</h1>
         <div className={styles.navbar}>
           {icones.map((icone, index) => (
             <button
