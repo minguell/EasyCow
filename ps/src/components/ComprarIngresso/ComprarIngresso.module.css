@@ -1,0 +1,172 @@
+.container {
+  margin-top: 10vw;
+  margin-left: 9vw;
+  margin-right: 9vw;
+  justify-content: center;
+  color: white;
+  margin-bottom: 10vw;
+}
+  
+  .title {
+    font-family: 'Milanello Free';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 3.2rem;
+    text-align: left;
+    margin-bottom: 4rem;
+    color: white;
+  }
+  
+  .formContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .inputsContainer {
+    flex: 1;
+    margin-right: 3rem;
+    max-width: 1000px;
+  }
+  
+  .input {
+    display: block;
+    width: 100%;
+    padding: 1.4rem;
+    padding-left: 2.2rem;
+    margin-bottom: 1.4rem;
+    background-color: #D45827;
+    border: 2px solid black;
+    color: white;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-family: 'Milanello Free';
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .input::placeholder {
+    color: white;
+    opacity: 0.6;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  
+  .button {
+    width: 70%;
+    padding: 0.75rem;
+    background-color: transparent;
+    border: 2px solid #D45827;
+    color: #D45827;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-family: 'Milanello Free';
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .button:hover {
+    background-color: #D45827;
+    color: white;
+  }
+  
+  .imageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image {
+    max-width: 100%;
+    max-height: 400px; 
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .formContainer {
+      flex-direction: column;
+    }
+  
+    .inputsContainer {
+      margin-right: 0;
+      margin-bottom: 1.5rem;
+      max-width: 100%;
+      width: 100%;
+    }
+  
+    .input {
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+  
+    .buttonContainer {
+      margin-top: 1rem;
+      width: 100%;
+    }
+  
+    .button {
+      width: 70%;
+      padding: 0.75rem;
+      font-size: 1rem;
+    }
+  
+    .imageContainer {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .image {
+      max-height: 300px; 
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      padding: 0.8rem;
+    }
+  
+    .title {
+      font-size: 1.3rem;
+      margin-bottom: 1.2rem;
+    }
+  
+    .imageContainer {
+      padding: 0 0.8rem;
+    }
+
+    .image {
+      max-height: 250px; 
+    }
+  }
+
+  @media (max-width: 996px) {
+    .formContainer {
+      display: inline-block;
+      width: 100%;
+    }
+
+
+    .inputsContainer {
+      width: 100%;
+      margin-bottom: 5vh;
+    }
+  
+  }

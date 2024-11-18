@@ -1,0 +1,56 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #0d0d0d;
+    color: white;
+  }
+  
+  .titulo {
+    font-family: Milanello;
+    font-size: 55px;
+    margin-bottom: 20px;
+    color: white;
+  }
+  
+  .retangulo {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  
+  .input {
+    font-family: Milanello;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e65100;
+    color: purple;
+    font-size: 14px;
+  }
+
+  .input::placeholder {
+    color: whitesmoke;
+}
+
+  
+  .botao {
+    font-family: Milanello;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e65100;
+    border-radius: 5px;
+    background-color: transparent;
+    color: #e65100;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .errorMessage {
+    color: red;
+    margin-top: 10px;
+  }
+  
