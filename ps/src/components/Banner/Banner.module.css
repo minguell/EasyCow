@@ -1,14 +1,16 @@
 .banner {
     position: relative;
-    width: 100%;
-    height: 100%; 
+    width: 100%; 
+    height: auto;
     overflow: clip;
+    /* background-color: rgb(219, 255, 219); */
+    background-color: #c9ffb3;
   }
   
   .bannerContent {
     position: absolute;
-    bottom: 20px;
-    right: 20px; 
+    bottom: 0px;
+    right: 0px; 
     text-align: right;
   }
 

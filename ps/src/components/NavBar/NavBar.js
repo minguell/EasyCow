@@ -36,9 +36,9 @@ const NavBar = () => {
       </div>
       <ul className={`${styles.navLinks} ${isOpen ? styles.open : ''}`}>
         <li><Link href="/" onClick={closeMenu}>HOME</Link></li>
-        <li><Link href="/#catalogo" onClick={closeMenu}>CATALOGO</Link></li>
-        <li><Link href="/#assassinos" onClick={closeMenu}>ASSASSINOS</Link></li>
-        <li><Link href="/#ingressos" onClick={closeMenu}>INGRESSOS</Link></li>
+        <li><Link href="/#lotes" onClick={closeMenu}>LOTES</Link></li>
+        <li><Link href="/#vender" onClick={closeMenu}>VENDER</Link></li>
+        <li><Link href="/#conta" onClick={closeMenu}>CONTA</Link></li>
       </ul>
     </nav>
   );

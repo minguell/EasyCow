@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "CineIDE - G7",
-  description: "Projeto CineIDE - Desenvolvido pelo Grupo 7",
+  title: "Easy Cow",
+  description: "Projeto EasyCow - Engenharia de Software",
 };
 
 export default function RootLayout({ children }) {

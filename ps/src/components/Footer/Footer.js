@@ -7,37 +7,21 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <div className={styles.mainContent}>
-          <div className={styles.socialIcons}>
-            <Link href="https://www.instagram.com/ide_jr/" target="_blank" rel="noopener noreferrer">
-              <Image
-                src="/images/instagram-icon.png"
-                alt="Instagram"
-                width={100}
-                height={100}
-                className={styles.iconImage}
-              />
-            </Link>
-            <Link href="https://www.linkedin.com/company/empresa-j%C3%BAnior-ide/" target="_blank" rel="noopener noreferrer">
-              <Image
-                src="/images/linkedin-icon.png"
-                alt="LinkedIn"
-                width={100}
-                height={100}
-                className={styles.iconImage}
-              />
-            </Link>
-            <Link href="https://idejr.com.br/" target="_blank" rel="noopener noreferrer">
-              <Image
-                src="/images/ide-logo.png"
-                alt="Logo-IDE"
-                width={100}
-                height={100}
-                className={styles.iconImage}
-              />
-            </Link>
-          </div>
-          <div className={styles.copyrightText}>
-            <p>CineIDE © Todos os direitos reservados.</p>
+          <div className={styles.footerRow}>
+            <div className={styles.socialIcons}>
+              <Link href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+                <Image
+                  src="/images/instagram-icon.png"
+                  alt="Instagram"
+                  width={100}
+                  height={100}
+                  className={styles.iconImage}
+                />
+              </Link>
+            </div>
+            <div className={styles.copyrightText}>
+              <p>EasyCow © Todos os direitos reservados.</p>
+            </div>
           </div>
           <div className={styles.footerLinks}>
             <Link href="/termos-de-uso">Termos de Uso</Link>
@@ -48,15 +32,6 @@ export default function Footer() {
           </div>
         </div>
         <div className={styles.logoContainer}>
-          <Link href="https://idejr.com.br/" target="_blank" rel="noopener noreferrer">
-            <Image
-              src="/images/ide-logo.png"
-              alt="Logo-IDE"
-              width={72}
-              height={48}
-              className={styles.logoImage}
-            />
-          </Link>
         </div>
       </div>
     </footer>

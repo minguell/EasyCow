@@ -1,12 +1,12 @@
 .footer {
-    background-color: #000;
+    background-color: rgb(94,148,65, 0.5);
     color: white;
     width: 100%;
-    padding: 2rem 0 3rem;
+    padding: 1rem 0 1rem;
     display: flex;
     align-items: center;
     position: relative;
-    min-height: 160px;
+    min-height: 40px;
   }
   
   .footerContent {
@@ -28,10 +28,17 @@
     width: 100%;
   }
   
+  .footerRow {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+  }
   .socialIcons {
     display: flex;
     gap: 24px;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    margin-right: 50px;
   }
   
   .iconImage {

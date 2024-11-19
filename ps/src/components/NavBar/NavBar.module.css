@@ -14,7 +14,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgb(94,148,65, 0.5);
+
   padding: 1rem 0;
   height: 60px;
 }
