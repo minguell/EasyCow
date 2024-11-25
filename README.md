@@ -35,7 +35,6 @@ Adotamos um estilo arquitetural baseado em camadas:
 - **Camada de Negócio:** Lógica para gestão de transações e validação de dados.
 - **Camada de Dados:** Persistência de informações relacionadas a usuários, lotes e transações.
 
-Os diagramas detalhados e as justificativas para a escolha arquitetural podem ser encontrados na pasta `docs/diagrams`.
 
 ## Requisitos Técnicos
 
