@@ -51,3 +51,14 @@ git clone <link-do-repositorio>
 2. Acesse o diretório do projeto:
    
 cd EasyCow
+
+3. Siga as instruções no arquivo `docs/setup.md` para configurar o ambiente.
+
+## Equipe
+
+
+## Licença
+
+Este projeto foi desenvolvido exclusivamente para fins acadêmicos e não possui uma licença comercial.
+
+---
