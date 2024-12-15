@@ -86,6 +86,16 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
+          <Link href="/#conta" onClick={closeMenu}>
+            CONTA
+          </Link>
+        </li>
+        <li>
+          <Link href="/#meuslotes" onClick={closeMenu}>
+            MEUS LOTES
+          </Link>
+        </li>
+        <li>
           <a onClick={openCadastroPopup} style={{ cursor: "pointer" }}>
             CADASTRO
           </a>
