@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "./Banner.module.css";
-import BannerImage from "@/assets/banner_EASYCOW.png";
+import BannerImage from "../../assets/banner_EASYCOW.png";
 import { auto } from "@popperjs/core";
 
 export default function Banner() {

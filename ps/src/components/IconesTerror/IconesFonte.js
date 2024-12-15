@@ -1,12 +1,12 @@
-import AnaImage from "@/assets/Ana.png";
-import AngeloImage from "@/assets/Angelo.png";
-import AugustoImage from "@/assets/Augusto.png";
-import BrunoImage from "@/assets/Bruno.png";
-import LucianaImage from "@/assets/Luciana.png";
-import MariaImage from "@/assets/Maria.png";
-import MerylImage from "@/assets/Meryl.png";
-import MiguelImage from "@/assets/Miguel.png";
-import NathanImage from "@/assets/Nathan.png";
+import AnaImage from "@/assets/Usuarios/Ana.png";
+import AngeloImage from "@/assets/Usuarios/Angelo.png";
+import AugustoImage from "@/assets/Usuarios/Augusto.png";
+import BrunoImage from "@/assets/Usuarios/Bruno.png";
+import LucianaImage from "@/assets/Usuarios/Luciana.png";
+import MariaImage from "@/assets/Usuarios/Maria.png";
+import MerylImage from "@/assets/Usuarios/Meryl.png";
+import MiguelImage from "@/assets/Usuarios/Miguel.png";
+import NathanImage from "@/assets/Usuarios/Nathan.png";
 
 
 const icones = [
