@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import styles from './Lotes.module.css';
-import { FaStar, FaStarHalfAlt, FaSearch } from 'react-icons/fa';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import Image from 'next/image';
+import Comprar from '../Comprar/Comprar';
 
 import Gado1 from "@/assets/Lotes/gado1.jpg";
 import Gado2 from "@/assets/Lotes/gado2.jpg";
@@ -14,7 +15,6 @@ import Gado6 from "@/assets/Lotes/gado6.jpg";
 import Gado7 from "@/assets/Lotes/gado7.jpeg";
 import Gado8 from "@/assets/Lotes/gado8.jpg";
 import Gado9 from "@/assets/Lotes/gado9.jpg";
-
 
 const listaLotes = [
   {
@@ -126,6 +126,7 @@ const StarRating = ({ rating }) => {
 export default function Lotes() {
   const [selectedLote, setSelectedLote] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [isComprarOpen, setIsComprarOpen] = useState(false);
 
   const openPopup = (lote) => {
     setSelectedLote(lote);
@@ -133,6 +134,12 @@ export default function Lotes() {
 
   const closePopup = () => {
     setSelectedLote(null);
+    setIsComprarOpen(false);
+  };
+
+  const confirmPurchase = () => {
+    alert(`Compra confirmada para o lote: ${selectedLote.nome}`);
+    closePopup();
   };
 
   const filteredBanners = listaLotes.filter(banner =>
@@ -212,11 +219,23 @@ export default function Lotes() {
                   <strong>Índice de qualidade:</strong> {selectedLote.indice_qualidade}
                   <StarRating rating={parseFloat(selectedLote.indice_qualidade)} />
                 </div>
+                <button
+                  className={styles.comprarButton}
+                  onClick={() => setIsComprarOpen(true)}
+                >
+                  Comprar
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
+
+      <Comprar
+        isOpen={isComprarOpen}
+        onClose={() => setIsComprarOpen(false)}
+        onConfirm={confirmPurchase}
+      />
     </section>
   );
 }
