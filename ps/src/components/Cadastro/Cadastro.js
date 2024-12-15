@@ -21,6 +21,16 @@ const Cadastro = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Password validation
+    const password = formData.senha;
+    const passwordRegex = /^(?=.*[A-Z]).{8,}$/; // At least 8 characters and 1 uppercase letter
+
+    if (!passwordRegex.test(password)) {
+      alert("A senha deve ter pelo menos 8 caracteres e incluir pelo menos uma letra maiúscula.");
+      return;
+    }
+
     console.log("Form data submitted:", formData);
   };
 

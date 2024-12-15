@@ -11,7 +11,15 @@ const Creditos = () => {
   };
 
   const handleSubmit = () => {
-    alert(`Code submitted: ${code}`);
+    // Code validation: must be exactly 16 characters
+    const codeRegex = /^.{16}$/; // Matches exactly 16 characters of any type
+
+    if (!codeRegex.test(code)) {
+      alert("O código deve conter exatamente 16 caracteres.");
+      return;
+    }
+
+    alert(`Código enviado: ${code}`);
     setCode("");
   };
 
