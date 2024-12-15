@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Cadastro from "../Cadastro/Cadastro";
 import Login from "../Login/Login";
+import Creditos from "../Creditos/Creditos";
 import styles from "./NavBar.module.css";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCadastroPopupOpen, setIsCadastroPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  const [isCreditosPopupOpen, setIsCreditosPopupOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -33,6 +35,14 @@ const NavBar = () => {
 
   const closeLoginPopup = () => {
     setIsLoginPopupOpen(false);
+  };
+
+  const openCreditosPopup = () => {
+    setIsCreditosPopupOpen(true);
+  };
+
+  const closeCreditosPopup = () => {
+    setIsCreditosPopupOpen(false);
   };
 
   useEffect(() => {
@@ -66,6 +76,11 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
+          <Link href="/#notificacoes" onClick={closeMenu}>
+            NOTIFICAÇÕES
+          </Link>
+        </li>
+        <li>
           <Link href="/#vender" onClick={closeMenu}>
             VENDER
           </Link>
@@ -78,6 +93,11 @@ const NavBar = () => {
         <li>
           <a onClick={openLoginPopup} style={{ cursor: "pointer" }}>
             LOGIN
+          </a>
+        </li>
+        <li>
+          <a onClick={openCreditosPopup} style={{ cursor: "pointer" }}>
+            CRÉDITOS
           </a>
         </li>
       </ul>
@@ -101,6 +121,17 @@ const NavBar = () => {
             <Login />
           </div>
           <div className={styles.popupOverlay} onClick={closeLoginPopup}></div>
+        </div>
+      )}
+      {isCreditosPopupOpen && (
+        <div className={styles.popup}>
+          <div className={styles.popupContent}>
+            <button className={styles.closeButton} onClick={closeCreditosPopup}>
+              &times;
+            </button>
+            <Creditos />
+          </div>
+          <div className={styles.popupOverlay} onClick={closeCreditosPopup}></div>
         </div>
       )}
     </nav>
