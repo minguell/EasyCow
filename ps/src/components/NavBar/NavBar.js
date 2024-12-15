@@ -5,6 +5,7 @@ import Link from "next/link";
 import Cadastro from "../Cadastro/Cadastro";
 import Login from "../Login/Login";
 import Creditos from "../Creditos/Creditos";
+import Conta from "../Conta/Conta"; // Import Conta component
 import styles from "./NavBar.module.css";
 
 const NavBar = () => {
@@ -12,6 +13,7 @@ const NavBar = () => {
   const [isCadastroPopupOpen, setIsCadastroPopupOpen] = useState(false);
   const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [isCreditosPopupOpen, setIsCreditosPopupOpen] = useState(false);
+  const [isContaPopupOpen, setIsContaPopupOpen] = useState(false); // State for Conta popup
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -43,6 +45,14 @@ const NavBar = () => {
 
   const closeCreditosPopup = () => {
     setIsCreditosPopupOpen(false);
+  };
+
+  const openContaPopup = () => {
+    setIsContaPopupOpen(true);
+  };
+
+  const closeContaPopup = () => {
+    setIsContaPopupOpen(false);
   };
 
   useEffect(() => {
@@ -86,9 +96,9 @@ const NavBar = () => {
           </Link>
         </li>
         <li>
-          <Link href="/#conta" onClick={closeMenu}>
+          <a onClick={openContaPopup} style={{ cursor: "pointer" }}>
             CONTA
-          </Link>
+          </a>
         </li>
         <li>
           <Link href="/#meuslotes" onClick={closeMenu}>
@@ -143,6 +153,9 @@ const NavBar = () => {
           </div>
           <div className={styles.popupOverlay} onClick={closeCreditosPopup}></div>
         </div>
+      )}
+      {isContaPopupOpen && (
+        <Conta isOpen={isContaPopupOpen} onClose={closeContaPopup} />
       )}
     </nav>
   );

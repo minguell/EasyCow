@@ -1,0 +1,97 @@
+/* Conta.module.css */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popup {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+  }
+  
+  .closeButton:hover {
+    color: #000;
+  }
+  
+  .profileSection {
+    margin-bottom: 20px;
+  }
+  
+  .profileImage {
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .fullName {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .infoSection {
+    margin-bottom: 20px;
+  }
+  
+  .infoSection p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .historySection {
+    margin-top: 20px;
+  }
+  
+  .historySection h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .historyList {
+    list-style-type: none;
+    padding: 0;
+    color: #777;
+  }
+  
+  .bottomCloseButton {
+    margin-top: 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .bottomCloseButton:hover {
+    background-color: #555;
+  }
+  
