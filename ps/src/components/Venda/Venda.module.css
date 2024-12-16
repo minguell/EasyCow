@@ -1,0 +1,58 @@
+.createContainer{
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.createContainer > h1 {
+    color: black;
+    margin-bottom: 2vh;
+}
+
+.groupInputs {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30%;
+    margin-top: 3vh;
+    min-height: 4vh;
+}
+
+.groupInputs > input {
+    width: 70%;
+    height: 4vh;
+}
+
+.groupInputs label {
+    color: black;
+}
+
+.form > input[type=submit]{
+    margin-top: 3vh;
+    color: black;
+    width: 30%;
+}
+
+.form input[type=file]{
+    margin-top: 3vh;
+    color: black;
+    height: 100%;
+}
+
+.form input[type="file"]::file-selector-button {
+    color: black; /* Cor do texto do botão */
+    text-align: center;
+    padding-right: 1.5vw;
+    padding-left: 1.5vw;
+}
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

@@ -54,7 +54,7 @@ const NavBar = () => {
       </div>
       <ul className={`${styles.navLinks} ${isOpen ? styles.open : ''}`}>
         <li><Link href="/lotesPage" onClick={closeMenu}>LOTES</Link></li>
-        <li><Link href="/lotesPage" onClick={closeMenu}>VENDER</Link></li>
+        <li><Link href="/vendaPage" onClick={closeMenu}>VENDER</Link></li>
         <li><Link href="/contaPage" onClick={closeMenu} >CONTA</Link></li>
         <li><a onClick={openCreditosPopup} style={{ cursor: "pointer" }}>CRÉDITOS</a></li>
         <li><Link href="/lotesPage" onClick={handleLogout}>SAIR</Link></li>
