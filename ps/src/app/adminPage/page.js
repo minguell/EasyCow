@@ -23,6 +23,10 @@ export default function contaPage() {
     }
   }, [router]);
 
+  if (token != "admin"){
+    return null;
+  }
+
   return (
     <div>
       <NavBarAdmin />
