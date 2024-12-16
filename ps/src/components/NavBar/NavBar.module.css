@@ -15,7 +15,6 @@
   justify-content: center;
   align-items: center;
   background-color: rgb(94,148,65, 0.5);
-
   padding: 1rem 0;
   height: 60px;
 }
@@ -29,22 +28,25 @@
   width: 100%;
   max-width: 800px;
   opacity: 0.9;
-  font-family: 'Milanello Free';
+  font-family: 'Arial';
 }
 
 .navLinks li {
   margin: 0 2rem;
 }
 
-.navLinks a {
-  color: white;
+.navLinks a, 
+.navLinks span { /* Ensure consistent styling for both <a> and <span> */
+  color: white !important;
   text-decoration: none;
   font-weight: bold;
   font-size: 1.5rem;
   transition: color 0.3s ease;
+  cursor: pointer; /* Pointer cursor for clickable spans */
 }
 
-.navLinks a:hover {
+.navLinks a:hover,
+.navLinks span:hover {
   color: #ccc;
 }
 
@@ -89,7 +91,7 @@
   }
 
   .navLinks.open {
-    max-height: 300px; /* Ajuste este valor conforme necessário */
+    max-height: 300px; /* Adjust this value as needed */
   }
 
   .navLinks li {
@@ -104,7 +106,59 @@
 }
 
 @media (max-width: 480px) {
-  .navLinks a {
+  .navLinks a, 
+  .navLinks span {
     font-size: 1.2rem;
   }
+}
+
+/* Popup styles */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popupContent {
+  background: #c9ffb3;
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1002;
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.closeButton:hover {
+  color: red;
 }

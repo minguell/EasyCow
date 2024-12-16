@@ -1,0 +1,48 @@
+.labelTxt{
+    color: black;
+}
+.loginGroup{
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 2vh;
+}
+
+.loginGroup > input {
+    width: 60%; 
+}
+
+.buttonsGroup{
+    width: 20%;
+    display: flex;
+    direction: row;
+    justify-content: space-between;
+
+}
+
+.buttonsGroup button{
+    margin-top: 2vh;
+    padding:5px 15px; 
+    background: black; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    width: 40%; 
+    color: white;
+}
+
+.errorMessage {
+    color: #FF0000; 
+    font-size: 0.9rem; 
+    margin-top: 10px; 
+  }

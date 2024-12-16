@@ -1,0 +1,57 @@
+/* Conta.module.css */
+
+.overlay {
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vh;
+  }
+  
+
+  .profileSection {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .profileImage {
+    border-radius: 50%;
+    margin-bottom: 15px;
+  }
+  
+  .fullName {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .infoSection {
+    margin-bottom: 20px;
+  }
+  
+  .infoSection p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .historySection {
+    margin-top: 20px;
+  }
+  
+  .historySection h3 {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .historyList {
+    list-style-type: none;
+    padding: 0;
+    color: #777;
+  }
+  
