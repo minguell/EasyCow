@@ -57,7 +57,7 @@ const NavBar = () => {
         <li><Link href="/vendaPage" onClick={closeMenu}>VENDER</Link></li>
         <li><Link href="/contaPage" onClick={closeMenu} >CONTA</Link></li>
         <li><a onClick={openCreditosPopup} style={{ cursor: "pointer" }}>CRÉDITOS</a></li>
-        <li><Link href="/lotesPage" onClick={handleLogout}>SAIR</Link></li>
+        <li><Link href="/" onClick={handleLogout}>SAIR</Link></li>
       </ul>
       {isCreditosPopupOpen && (
         <div className={styles.popup}>

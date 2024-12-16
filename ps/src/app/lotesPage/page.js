@@ -18,6 +18,8 @@ export default function LotesPage() {
     if (!token) {
       router.push("/"); // Redireciona para login
     }
+
+    
   }, [router]);
 
   return (

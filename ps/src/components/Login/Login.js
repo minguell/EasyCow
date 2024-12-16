@@ -17,7 +17,8 @@ export default function Login() {
     if (username === "teste" && password === "123") {
       setError(""); // Limpa mensagens de erro
 
-      const token = "teste"; 
+
+      const token = username; 
       const expirationTime = Date.now() + 5 * 60 * 60 * 1000; // 5 horas em milissegundos
       localStorage.setItem("authToken", token); // cria um token e seta no local storage do navegador
       localStorage.setItem("authTokenExpiration", expirationTime);

@@ -29,6 +29,14 @@
 
 }
 
+.loginGroup input[type=file] {
+    color: black;
+}
+
+.loginGroup input[type=file]::file-selector-button  {
+    color: black;
+}
+
 .buttonsGroup button{
     margin-top: 2vh;
     padding:5px 15px; 
@@ -39,4 +47,8 @@
     border-radius: 5px;
     width: 40%; 
     color: white;
+}
+
+.errorMessage{
+    color: red
 }
