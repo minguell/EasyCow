@@ -8,7 +8,7 @@ import Footer from "../../components/Footer/Footer";
 
 
 
-export default function contaPage() {
+export default function adminPage() {
     const router = useRouter();
 
   useEffect(() => {
