@@ -1,18 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./Conta.module.css";
 import Image from "next/image";
 import ProfilePic from "../../assets/Usuarios/Miguel.png";
 
-export default function Conta() {
-  const [token, setToken] = useState("");
-
-  useEffect(() => {
-    // Acessa o token do localStorage
-    const storedToken = localStorage.getItem("authToken");
-    if (storedToken) {
-      setToken(storedToken); // Atualiza o estado com o token
-    }
-  }, []);
+export default function Conta({ token, isAdmin }) {
+  if (!isAdmin) {
+    return null; // Retorna null se não for admin
+  }
 
   return (
     <div className={styles.overlay}>

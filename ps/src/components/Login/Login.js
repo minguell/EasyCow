@@ -14,7 +14,7 @@ export default function Login() {
     const password = event.target.elements.password.value;
 
     // Verifica as credenciais
-    if (username === "teste" && password === "123") {
+    if ((username === "admin" && password === "123") || (username === "teste" && password === "123")) {
       setError(""); // Limpa mensagens de erro
 
 
@@ -24,8 +24,12 @@ export default function Login() {
       localStorage.setItem("authTokenExpiration", expirationTime);
 
 
-
-      router.push("/lotesPage"); 
+      if (username === "admin"){
+        router.push("/adminPage");   
+      }else {
+        router.push("/lotesPage"); 
+      }
+      
     } else {
       setError("Usuário ou senha inválidos!"); 
     }

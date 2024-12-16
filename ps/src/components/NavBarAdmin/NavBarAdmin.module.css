@@ -1,0 +1,115 @@
+@font-face {
+  font-family: 'Milanello Free';
+  src: url('../../app/fonts/MilanelloFree.ttf') format('truetype');
+  font-style: normal;
+  font-display: swap;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(94,148,65, 0.5);
+  padding: 1rem 0;
+  height: 60px;
+}
+
+.navLinks {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 800px;
+  opacity: 0.9;
+  font-family: 'Arial';
+}
+
+.navLinks li {
+  margin: 0 2rem;
+}
+
+.navLinks a, 
+.navLinks span { /* Ensure consistent styling for both <a> and <span> */
+  color: white !important;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.5rem;
+  transition: color 0.3s ease;
+  cursor: pointer; /* Pointer cursor for clickable spans */
+}
+
+.navLinks a:hover,
+.navLinks span:hover {
+  color: #ccc;
+}
+
+.menuIcon {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 1024px) {
+  .navLinks li {
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: flex-end;
+  }
+
+  .menuIcon {
+    display: block;
+  }
+
+  .navLinks {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.7);
+    align-items: center;
+    padding: 1rem 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .navLinks.open {
+    max-height: 300px; /* Adjust this value as needed */
+  }
+
+  .navLinks li {
+    margin: 0.5rem 0;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .navLinks.open li {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .navLinks a, 
+  .navLinks span {
+    font-size: 1.2rem;
+  }
+}
+
+

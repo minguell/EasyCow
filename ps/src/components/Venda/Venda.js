@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
-import styles from "./Venda.module.css"; 
-import { useRouter } from "next/navigation";
+import React from "react";
+import styles from "./Venda.module.css";
 
-export default function Venda() {
+export default function Venda({ token, isAdmin }) {
+  if (!isAdmin) {
+    return <div>Acesso negado</div>; // Retorna mensagem de acesso negado se não for admin
+  }
+
   return (
     <div className={styles.createContainer}>
         <h1>Preencha os dados do anúncio</h1>
@@ -29,7 +32,7 @@ export default function Venda() {
             </div>
 
             <div className={styles.groupInputs}>
-                <label for="imageUpload">Imagem:</label>
+                <label htmlFor="imageUpload">Imagem:</label>
                 <input type="file" id="imageUpload" name="image" accept="image/*" />
             </div>
 
@@ -38,5 +41,3 @@ export default function Venda() {
     </div>
   );
 }
-
-
