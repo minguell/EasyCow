@@ -3,11 +3,7 @@ import styles from "./Conta.module.css";
 import Image from "next/image";
 import ProfilePic from "../../assets/Usuarios/Miguel.png";
 
-export default function Conta({ token, isAdmin }) {
-  if (!isAdmin) {
-    return null; // Retorna null se não for admin
-  }
-
+export default function Conta() {
   return (
     <div className={styles.overlay}>
       <div className={styles.profileSection}>

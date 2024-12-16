@@ -7,7 +7,6 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
 export default function ContaPage() {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [token, setToken] = useState("");
   const router = useRouter();
 
@@ -19,11 +18,9 @@ export default function ContaPage() {
       router.push("/"); // Redireciona para login
     } else {
       setToken(storedToken);
-      if (storedToken !== 'admin') {
-        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
-      } else {
-        router.push("/lotesPage"); // Redireciona para lotesPage se não for admin
-      }
+      if (storedToken == 'admin') {
+        router.push("/lotesPage"); // Redireciona para lotesPage se for admin
+      } 
     }
   }, [router]);
 
@@ -34,7 +31,7 @@ export default function ContaPage() {
   return (
     <div>
       <NavBar />
-      <Conta token={token} isAdmin={isAdmin} />
+      <Conta  />
       <Footer />
     </div>
   );

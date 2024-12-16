@@ -7,7 +7,6 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
 export default function VendaPage() {
-  const [isAdmin, setIsAdmin] = useState(false);
   const [token, setToken] = useState("");
   const router = useRouter();
 
@@ -19,11 +18,9 @@ export default function VendaPage() {
       router.push("/"); // Redireciona para login
     } else {
       setToken(storedToken);
-      if (storedToken !== 'admin') {
-        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
-      } else {
-        router.push("/"); // Redireciona para login se não for admin
-      }
+      if (storedToken == 'admin') {
+        router.push("/"); // Redireciona para login se for admin
+      } 
     }
   }, [router]);
 
@@ -34,7 +31,7 @@ export default function VendaPage() {
   return (
     <div>
       <NavBar />
-      <Venda token={token} isAdmin={isAdmin} />
+      <Venda  />
       <Footer />
     </div>
   );
