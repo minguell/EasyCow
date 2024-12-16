@@ -1,25 +1,10 @@
 "use client";
-import { useState, useEffect } from "react";
-import styles from "./Venda.module.css"; 
-import { useRouter } from "next/navigation";
+import React from "react";
+import styles from "./Venda.module.css";
 
-export default function Venda() {
-  const [token, setToken] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    // Acessa o token do localStorage
-    const storedToken = localStorage.getItem("authToken");
-    if (storedToken) {
-      setToken(storedToken); // Atualiza o estado com o token
-      if (storedToken !== 'admin') {
-        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
-      }
-    }
-  }, []);
-
+export default function Venda({ token, isAdmin }) {
   if (!isAdmin) {
-    return <div>Acesso negado</div>;
+    return <div>Acesso negado</div>; // Retorna mensagem de acesso negado se não for admin
   }
 
   return (
