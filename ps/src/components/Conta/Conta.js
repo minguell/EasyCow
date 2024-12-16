@@ -4,6 +4,8 @@ import Image from "next/image";
 import ProfilePic from "../../assets/Usuarios/Miguel.png";
 
 export default function Conta() {
+    const token = localStorage.getItem("authToken");
+    
   return (
     <div className={styles.overlay}>
       <div className={styles.profileSection}>
