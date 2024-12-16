@@ -16,8 +16,10 @@ export default function contaPage() {
     const token = localStorage.getItem("authToken");
 
 
-    if (token != "admin") {
-      router.push("/"); // Redireciona para login
+    if (!token){
+        router.push("/");
+    }else if (token != "admin") {
+      router.push("/lotesPage"); // Redireciona para login
     }
   }, [router]);
 
