@@ -13,11 +13,18 @@
 }
 
 .groupInputs {
-    margin-bottom: 15px;
-    width: 100%;
-    max-width: 400px;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 30%;
+    margin-top: 3vh;
+    min-height: 4vh;
+}
 
+.groupInputs > input {
+    width: 70%;
+    height: 4vh;
+}
 
 .groupInputs label {
     color: black;
