@@ -5,14 +5,22 @@ import ProfilePic from "../../assets/Usuarios/Miguel.png";
 
 export default function Conta() {
   const [token, setToken] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     // Acessa o token do localStorage
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
       setToken(storedToken); // Atualiza o estado com o token
+      if (storedToken === 'teste') {
+        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
+      }
     }
   }, []);
+
+  if (!isAdmin) {
+    return <div>Acesso negado</div>;
+  }
 
   return (
     <div className={styles.overlay}>

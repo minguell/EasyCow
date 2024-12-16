@@ -1,9 +1,27 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./Venda.module.css"; 
 import { useRouter } from "next/navigation";
 
 export default function Venda() {
+  const [token, setToken] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // Acessa o token do localStorage
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken) {
+      setToken(storedToken); // Atualiza o estado com o token
+      if (storedToken === 'teste') {
+        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
+      }
+    }
+  }, []);
+
+  if (!isAdmin) {
+    return <div>Acesso negado</div>;
+  }
+
   return (
     <div className={styles.createContainer}>
         <h1>Preencha os dados do anúncio</h1>
@@ -29,7 +47,7 @@ export default function Venda() {
             </div>
 
             <div className={styles.groupInputs}>
-                <label for="imageUpload">Imagem:</label>
+                <label htmlFor="imageUpload">Imagem:</label>
                 <input type="file" id="imageUpload" name="image" accept="image/*" />
             </div>
 
@@ -38,5 +56,3 @@ export default function Venda() {
     </div>
   );
 }
-
-
