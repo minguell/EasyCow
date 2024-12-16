@@ -1,27 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Conta.module.css";
 import Image from "next/image";
-import ProfilePic from "../../assets/Usuarios/Miguel.png";
+import ProfilePic from "../../assets/Usuarios/Ana.png";
 
 export default function Conta() {
-    const token = localStorage.getItem("authToken");
-    
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("authToken"); // Usando o nome do usuário como token aqui.
+  const fakeToken = "Nathan Mattes"
+
+  useEffect(() => {
+    if (!token) return;
+
+    fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(fakeToken)}`)
+      .then((response) => {
+        if (!response.ok) throw new Error("Erro ao buscar dados do usuário");
+        return response.json();
+      })
+      .then((data) => {
+        setUserData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, [token]);
+
+  if (loading) {
+    return <p>Carregando...</p>;
+  }
+
+  if (!userData) {
+    return <p>Usuário não encontrado.</p>;
+  }
+
   return (
     <div className={styles.overlay}>
       <div className={styles.profileSection}>
         <Image 
-          src={ProfilePic} 
-          alt="Profile Picture" 
+          src={userData.foto} 
+          alt="Foto de Perfil" 
           className={styles.profileImage} 
           width={300} 
           height={300} 
         />
-        <h2 className={styles.fullName}>{token || "Usuário Desconhecido"}</h2>
+        <h2 className={styles.fullName}>{userData.nome}</h2>
       </div>
 
       <div className={styles.infoSection}>
-        <p><strong>Data de nascimento:</strong> 01/01/2000</p>
-        <p><strong>Email:</strong> miguel@gmail.com</p>
+        <p><strong>Data de nascimento:</strong> {new Date(userData.data_nascimento).toLocaleDateString()}</p>
+        <p><strong>Email:</strong> {userData.email}</p>
       </div>
 
       <div className={styles.historySection}>

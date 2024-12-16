@@ -41,6 +41,31 @@ app.post('/api/usuarios', (req, res) => {
   });
 });
 
+// Rota para buscar informações do usuário pelo nome
+app.get('/api/usuario', (req, res) => {
+  const { nome } = req.query;
+
+  if (!nome) {
+    return res.status(400).json({ mensagem: 'Nome não fornecido.' });
+  }
+
+  const query = 'SELECT nome, data_nascimento, email, foto FROM usuarios WHERE nome = ?';
+
+  db.query(query, [nome], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar dados do usuário:', err);
+      return res.status(500).json({ mensagem: 'Erro ao buscar dados do usuário.' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+    }
+
+    res.json(results[0]);
+  });
+});
+
+
 // Inicia o servidor
 const PORT = 5000;
 app.listen(PORT, () => {
