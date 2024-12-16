@@ -1,12 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Creditos.module.css";
 
 const Creditos = () => {
-var limitChars = 10
-var credit = 1000
+  var limitChars = 10;
+  var credit = 1000;
   const [code, setCode] = useState("");
+  const [token, setToken] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    // Acessa o token do localStorage
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken) {
+      setToken(storedToken); // Atualiza o estado com o token
+      if (storedToken !== 'admin') {
+        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
+      }
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     setCode(e.target.value);
@@ -23,6 +36,10 @@ var credit = 1000
     alert(`Código enviado: ${code}` + "\nCrédito recebido: " + credit);
     setCode("");
   };
+
+  if (!isAdmin) {
+    return <div>Acesso negado</div>;
+  }
 
   return (
     <div className={styles.creditosContainer}>
