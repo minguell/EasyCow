@@ -1,39 +1,63 @@
 "use client";
-import styles from "./register.module.css"; 
+import styles from "./register.module.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Register() {
-    const [error, setError] = useState(""); // Estado para mensagens de erro
-    const router = useRouter(); // Hook para controle de navegação
+  const [error, setError] = useState(""); // Estado para mensagens de erro
+  const router = useRouter(); // Hook para controle de navegação
 
-    const GoLogin = () => {
-      router.push("/"); // Redireciona para a página de login
-    };
+  const GoLogin = () => {
+    router.push("/"); // Redireciona para a página de login
+  };
+
+
+  const DoRegister = async (event) => {
+    event.preventDefault();
   
-
-    const DoRegister = (event) => {
-        event.preventDefault();  // Implementar sistema de registro <<Alterar>>
-
-      const username = event.target.elements.user.value;
-      const email = event.target.elements.email.value;
-      const date = event.target.elements.date.value;
-      const file = event.target.elements.image.files[0];
-      const password = event.target.elements.password.value;
-      const confirmPassword = event.target.elements.confirmPassword.value;
-
-
-      if (password == confirmPassword){
-        setError(""); // Limpa mensagens de erro
-
-        // REGISTRAR USUÁRIO NO BANCO DE DADOS AQUI --passar os dados nas vars acima
-
-      }else {
-        setError("As senhas não coincidem"); 
+    const username = event.target.elements.user.value;
+    const email = event.target.elements.email.value;
+    const date = event.target.elements.date.value;
+    const password = event.target.elements.password.value;
+    const confirmPassword = event.target.elements.confirmPassword.value;
+    const image = event.target.elements.image.files[0];
+  
+    // Verifica se as senhas são iguais
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem");
+      return;
+    }
+  
+    setError(""); // Limpa mensagens de erro
+  
+    // Cria o objeto FormData para enviar os dados ao servidor
+    const formData = new FormData();
+    formData.append("username", username);
+    formData.append("email", email);
+    formData.append("date", date);
+    formData.append("password", password);
+    formData.append("image", image);
+  
+    try {
+      const response = await fetch('/api/route', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        alert("Usuário registrado com sucesso!");
+        router.push('/'); // Redireciona para a página de login
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Erro ao registrar usuário");
       }
-
-
-      };
+    } catch (error) {
+      console.error(error);
+      setError("Erro ao conectar ao servidor");
+    }
+  };
+  
 
   return (
     <div className={styles.loginContainer}>
@@ -63,8 +87,8 @@ export default function Register() {
           <input type="file" id="imageUpload" name="image" accept="image/*" />
         </div>
         <div className={styles.buttonsGroup}>
-            <button type="submit">Registrar</button>
-            <button type="submit" onClick={GoLogin}>Voltar</button>
+          <button type="submit">Registrar</button>
+          <button type="submit" onClick={GoLogin}>Voltar</button>
         </div>
         {error && <p className={styles.errorMessage}>{error}</p>} {/* Exibe a mensagem de erro, se houver */}
       </form>
