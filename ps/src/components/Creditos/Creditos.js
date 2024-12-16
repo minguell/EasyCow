@@ -15,7 +15,7 @@ const Creditos = () => {
     const storedToken = localStorage.getItem("authToken");
     if (storedToken) {
       setToken(storedToken); // Atualiza o estado com o token
-      if (storedToken === 'teste') {
+      if (storedToken !== 'admin') {
         setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
       }
     }
