@@ -14,8 +14,6 @@ export default function Lotes() {
   const loadLotes = async (event) => {
     event.preventDefault();
 
-    //const pesquisa = event.target.elements.pesquisa.value;
-
     const formData = new FormData();
     formData.append("pesquisa",searchTerm);
 
@@ -71,7 +69,7 @@ export default function Lotes() {
                     >
                       <div className={styles.imageWrapper}>
                         <img
-                          src={banner.imagemUrl}
+                          src={banner.imagem}
                           alt={`Imagem Lote ${banner.descricao}`}
                           className={styles.bannerLote}
                         />
@@ -96,7 +94,7 @@ export default function Lotes() {
             <div className={styles.popupGrid}>
               <div className={styles.popupImageContainer}>
                 <img
-                  src={selectedLote.imagemUrl}
+                  src={selectedLote.imagem}
                   alt={`Imagem Lote ${selectedLote.nome}`}
                   className={styles.popupImage}
                 />
