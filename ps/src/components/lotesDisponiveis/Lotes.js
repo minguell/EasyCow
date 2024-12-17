@@ -5,7 +5,6 @@ import styles from './Lotes.module.css';
 
 export default function Lotes() {
   const [error, setError] = useState(''); // Estado para mensagens de erro
-
   const [selectedLote, setSelectedLote] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBanners, setFilteredBanners] = useState([]);
@@ -24,7 +23,6 @@ export default function Lotes() {
       });
       if (response.ok) {
         const data = await response.json();
-        alert("Lotes carregados com sucesso!");
 
         // Filtrando os lotes para exibir apenas aqueles com banner.disponivel === 1
         const availableBanners = data.filter(banner => banner.disponivel === 1);
