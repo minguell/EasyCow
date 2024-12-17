@@ -64,14 +64,14 @@ export default function Lotes() {
   };
 
   const confirmPurchase = async (event) => {
-    if(userData.saldo >= selectedLote.valor){
+    console.log(selectedLote.valor);
+    if(parseFloat(userData.saldo) >= parseFloat(selectedLote.valor)){
+      const { id } = selectedLote; // Obtém o ID do lote selecionado
       const formData = new FormData();
       formData.append("usuario",userData.nome);
       formData.append("lote",selectedLote.id);
-      const d = newDate();
-      let data_compra;
-      data_compra.append(d.getFullYear(),'-',d.getMonth(),'-',d.getDate());
-      formData.append("data_compra",data_compra);
+      const d = new Date();
+      formData.append("data_compra",d);
       try {
         const response = await fetch('/api/compras', {
             method: 'POST',
@@ -89,6 +89,35 @@ export default function Lotes() {
         console.error(error);
         setError("Erro ao conectar ao servidor");
     }
+      // Atualiza o status do lote para 1 (aprovado)
+    fetch("http://localhost:5000/api/atualizar-disponibilidade", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: id, // Passa o ID do lote selecionado
+        disponivel: 2, // Marca o lote como aprovado
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Erro ao atualizar status do lote. Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(() => {
+        // Atualiza o estado local para remover o lote aprovado da lista de lotes disponíveis
+        setFilteredBanners((prevBanners) =>
+          prevBanners.filter((banner) => banner.id !== id)
+        );
+        alert("Compra bem Sucedida!");
+        setSelectedLote(null); // Desmarcar o lote após aprovação
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar status do lote:", error);
+        alert("Erro ao atualizar status do lote.");
+      });
 
       alert(`Compra confirmada para o lote: ${selectedLote.nome}`);
       closePopup();
