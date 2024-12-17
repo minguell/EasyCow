@@ -2,53 +2,52 @@
 
 import { useState, useEffect } from 'react';
 import styles from './Lotes.module.css';
+import { useRouter } from 'next/navigation';
 
 export default function Lotes() {
+  const router = useRouter(); // Hook para controle de navegação
+  const [error, setError] = useState(''); // Estado para mensagens de erro
+
   const [selectedLote, setSelectedLote] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBanners, setFilteredBanners] = useState([]);
-  const [error, setError] = useState(null);
 
   // Função para carregar os lotes
-  const loadLotes = async () => {
+  const loadLotes = async (event) => {
+    event.preventDefault();
+
+    //const pesquisa = event.target.elements.pesquisa.value;
+
+    const formData = new FormData();
+    formData.append("pesquisa", searchTerm);
+
+
     try {
-      const response = await fetch('/api/lotes');
-      const data = await response.json();
-      console.log('Dados carregados:', data); // Verifique os dados
-      if (!Array.isArray(data)) {
-        throw Error('Invalid data format');
+      const response = await fetch('/api/routeLotes', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("lotes carregados com sucesso!");
+        setFilteredBanners(data); // Carrega os lotes
+        console.log(filteredBanners);
+        //router.push('/lotesPage'); // Redireciona para a página de lotes
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Erro ao carregar lotes");
       }
-      setFilteredBanners(data);
-    } catch (err) {
-      console.error('Erro ao carregar lotes:', err);
-      setError('Erro ao carregar lotes.');
     }
-  };
-  
 
-  // Função para filtrar lotes por busca
-  const searchLotes = async () => {
-    try {
-      const response = await fetch(`/api/lotes?term=${searchTerm}`);
-      const data = await response.json();
-      console.log('Dados filtrados:', data); // Verifique os dados
-      setFilteredBanners(data);
-    } catch (err) {
-      console.error('Erro ao buscar lotes:', err);
+    catch (error) {
+      console.error(error);
+      setError("Erro ao conectar ao servidor");
     }
+
   };
 
-  useEffect(() => {
-    loadLotes(); // Carrega os lotes ao montar o componente
-  }, []);
 
-  useEffect(() => {
-    if (searchTerm.length > 0) {
-      searchLotes(); // Filtra lotes quando o termo de busca muda
-    } else {
-      loadLotes(); // Recarrega todos os lotes
-    }
-  }, [searchTerm]);
 
   return (
     <section id="lotes">
@@ -59,31 +58,38 @@ export default function Lotes() {
           <div className={styles.container}>
             <div className={styles.searchContainer}>
               <h2>LOTES DISPONÍVEIS:</h2>
-              <input
-                type="text"
-                placeholder="Pesquisar lotes..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={styles.searchInput}
-              />
-            </div>
-            <div className="row" style={{ justifyContent: 'center' }}>
-              {filteredBanners.map((banner) => (
-                <button
-                  key={banner.id}
-                  className={`col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-4 ${styles.loteButton}`}
-                  onClick={() => setSelectedLote(banner)}
-                >
-                  <div className={styles.imageWrapper}>
-                    <img
-                      src={banner.imagemUrl}
-                      alt={`Imagem Lote ${banner.descricao}`}
-                      className={styles.bannerLote}
-                    />
-                    <div className={styles.loteTitle}>{banner.descricao}</div>
-                  </div>
-                </button>
-              ))}
+              <form onSubmit={loadLotes}>
+                <input
+                  type="text"
+                  placeholder="Pesquisar lotes..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className={styles.searchInput}
+                />
+                <button type="submit">Pesquisar</button>
+              </form>
+              <div className="row" style={{ justifyContent: 'center' }}>
+                {filteredBanners.length > 0 ? (
+                  filteredBanners.map((banner) => (
+                    <button
+                      key={banner.id}
+                      className={`col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-4 ${styles.loteButton}`}
+                      onClick={() => setSelectedLote(banner)}
+                    >
+                      <div className={styles.imageWrapper}>
+                        <img
+                          src={banner.imagemUrl}
+                          alt={`Imagem Lote ${banner.descricao}`}
+                          className={styles.bannerLote}
+                        />
+                        <div className={styles.loteTitle}>{banner.descricao}</div>
+                      </div>
+                    </button>
+                  ))
+                ) : (
+                  <p>Nenhum lote encontrado</p>
+                )}
+              </div>
             </div>
           </div>
         </div>
