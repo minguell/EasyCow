@@ -19,7 +19,6 @@ export default function Lotes() {
     const formData = new FormData();
     formData.append("pesquisa", searchTerm);
 
-
     try {
       const response = await fetch('/api/routeLotes', {
         method: 'POST',
@@ -28,23 +27,22 @@ export default function Lotes() {
 
       if (response.ok) {
         const data = await response.json();
-        alert("lotes carregados com sucesso!");
-        setFilteredBanners(data); // Carrega os lotes
-        console.log(filteredBanners);
+        alert("Lotes carregados com sucesso!");
+
+        // Filtrando os lotes para exibir apenas aqueles com banner.disponivel === 1
+        const availableBanners = data.filter(banner => banner.disponivel === 1);
+
+        setFilteredBanners(availableBanners); // Carrega os lotes disponíveis
+        console.log(availableBanners); // Verifique os lotes filtrados no console
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Erro ao carregar lotes");
       }
-    }
-
-    catch (error) {
+    } catch (error) {
       console.error(error);
       setError("Erro ao conectar ao servidor");
     }
-
   };
-
-
 
   return (
     <section id="lotes">
@@ -66,32 +64,33 @@ export default function Lotes() {
                 <button className={styles.searchButton} type="submit">Pesquisar</button>
               </form>
             </div>
-              <div className="row" style={{ justifyContent: 'center' }}>
-                {filteredBanners.length > 0 ? (
-                  filteredBanners.map((banner) => (
-                    <button
-                      key={banner.id}
-                      className={`col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-4 ${styles.loteButton}`}
-                      onClick={() => setSelectedLote(banner)}
-                    >
-                      <div className={styles.imageWrapper}>
-                        <img
-                          src={banner.imagem}
-                          alt={`Imagem Lote ${banner.descricao}`}
-                          className={styles.bannerLote}
-                        />
-                        <div className={styles.loteTitle}>{banner.descricao}</div>
-                      </div>
-                    </button>
-                  ))
-                ) : (
-                  <p>Nenhum lote encontrado</p>
-                )}
-              </div>
-            
+
+            <div className="row" style={{ justifyContent: 'center' }}>
+              {filteredBanners.length > 0 ? (
+                filteredBanners.map((banner) => (
+                  <button
+                    key={banner.id}
+                    className={`col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-4 ${styles.loteButton}`}
+                    onClick={() => setSelectedLote(banner)}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <img
+                        src={banner.imagem}
+                        alt={`Imagem Lote ${banner.descricao}`}
+                        className={styles.bannerLote}
+                      />
+                      <div className={styles.loteTitle}>{banner.descricao}</div>
+                    </div>
+                  </button>
+                ))
+              ) : (
+                <p>Nenhum lote encontrado</p>
+              )}
+            </div>
           </div>
         </div>
       )}
+
       {selectedLote && (
         <div className={styles.popup}>
           <div className={styles.popupContent}>
