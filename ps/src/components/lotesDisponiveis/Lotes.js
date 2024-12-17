@@ -2,17 +2,105 @@
 
 import { useState, useEffect } from 'react';
 import styles from './Lotes.module.css';
+import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import Comprar from '../Comprar/Comprar';
+
+const StarRating = ({ rating }) => {
+  const fullStars = Math.floor(rating);
+  const decimalPart = rating - fullStars;
+  const hasHalfStar = decimalPart >= 0.25 && decimalPart < 0.75;
+  const hasFullStar = decimalPart >= 0.75;
+
+  return (
+    <div className={styles.starRating}>
+      {[...Array(5)].map((_, i) => (
+        <span key={i}>
+          {i < fullStars || (i === fullStars && hasFullStar) ? (
+            <FaStar className={styles.starFilled} />
+          ) : i === fullStars && hasHalfStar ? (
+            <FaStarHalfAlt className={styles.starHalf} />
+          ) : (
+            <FaStar className={styles.starEmpty} />
+          )}
+        </span>
+      ))}
+    </div>
+  );
+};
+
+ 
 
 export default function Lotes() {
   const [error, setError] = useState(''); // Estado para mensagens de erro
   const [selectedLote, setSelectedLote] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredBanners, setFilteredBanners] = useState([]);
+  const [isComprarOpen, setIsComprarOpen] = useState(false);
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("authToken"); // Usando o nome do usuário como token aqui.
+
+  useEffect(() => {
+    if (!token) return;
+
+    fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(token)}`)
+      .then((response) => {
+        if (!response.ok) throw new Error("Erro ao buscar dados do usuário");
+        return response.json();
+      })
+      .then((data) => {
+        setUserData(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+      });
+  }, [token]);
+
+  const closePopup = () => {
+    setSelectedLote(null);
+    setIsComprarOpen(false);
+  };
+
+  const confirmPurchase = async (event) => {
+    if(userData.saldo >= selectedLote.valor){
+      const formData = new FormData();
+      formData.append("usuario",userData.nome);
+      formData.append("lote",selectedLote.id);
+      const d = newDate();
+      let data_compra;
+      data_compra.append(d.getFullYear(),'-',d.getMonth(),'-',d.getDate());
+      formData.append("data_compra",data_compra);
+      try {
+        const response = await fetch('/api/compras', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            alert("Compra registrada com sucesso!");
+        } else {
+            const errorData = await response.json();
+            setError(errorData.error || "Erro ao registrar compra");
+        }
+    } catch (error) {
+        console.error(error);
+        setError("Erro ao conectar ao servidor");
+    }
+
+      alert(`Compra confirmada para o lote: ${selectedLote.nome}`);
+      closePopup();
+    }else{
+      alert('Saldo insuficiente');
+      closePopup();
+    }
+  };
 
   // Função para carregar os lotes
   const loadLotes = async (event) => {
     event.preventDefault();
-
     const formData = new FormData();
     formData.append("pesquisa", searchTerm);
 
@@ -79,7 +167,7 @@ export default function Lotes() {
                   </button>
                 ))
               ) : (
-                <p>Nenhum lote encontrado</p>
+                <p></p>
               )}
             </div>
           </div>
@@ -89,7 +177,7 @@ export default function Lotes() {
       {selectedLote && (
         <div className={styles.popup}>
           <div className={styles.popupContent}>
-            <button className={styles.closeButton} onClick={() => setSelectedLote(null)}>
+            <button className={styles.closeButton} onClick={closePopup}>
               &times;
             </button>
             <div className={styles.popupGrid}>
@@ -108,12 +196,25 @@ export default function Lotes() {
                 <p><strong>Valor de compra:</strong> {selectedLote.valor}</p>
                 <div className={styles.rating}>
                   <strong>Índice de qualidade:</strong> {selectedLote.indice_qualidade}
+                  <StarRating rating={parseFloat(selectedLote.indice_qualidade)} />
                 </div>
+                <button
+                  className={styles.comprarButton}
+                  onClick={() => setIsComprarOpen(true)}
+                >
+                  Comprar
+                </button>
               </div>
             </div>
           </div>
         </div>
       )}
+
+      <Comprar
+        isOpen={isComprarOpen}
+        onClose={() => setIsComprarOpen(false)}
+        onConfirm={confirmPurchase}
+      />
     </section>
   );
 }

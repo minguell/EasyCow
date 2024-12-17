@@ -9,6 +9,7 @@ import Creditos from "../Creditos/Creditos";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCreditosPopupOpen, setIsCreditosPopupOpen] = useState(false);
+  const router = useRouter(); // Hook para controle de navegação
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
