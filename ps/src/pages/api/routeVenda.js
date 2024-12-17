@@ -25,7 +25,7 @@ export const config = {
 const handler = async (req, res) => {  // Adicione 'res' como parâmetro
   if (req.method === 'POST') {
     const form = new IncomingForm({
-      uploadDir: path.join(process.cwd(), 'src/assets/Lotes'),
+      uploadDir: path.join(process.cwd(), 'public/assets/Lotes'),
       keepExtensions: true
     });
 
@@ -41,7 +41,7 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
 
         try {
           const {anunciante, indice, cidade, preço, descricao } = fields;
-          const filePath = files.image && files.image[0]?.filepath ? '/assets/Lotes' + path.basename(files.image[0].filepath) : null;
+          const filePath = files.image && files.image[0]?.filepath ? '/assets/Lotes/' + path.basename(files.image[0].filepath) : null;
           const disponivel = 0;
 
           if (!filePath) {
