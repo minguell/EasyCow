@@ -22,7 +22,6 @@ CREATE TABLE lotes (
 );
 
 
-
 CREATE TABLE gift_cards (
     id INT AUTO_INCREMENT PRIMARY KEY,
     codigo VARCHAR(20) NOT NULL,
@@ -32,10 +31,10 @@ CREATE TABLE gift_cards (
 
 CREATE TABLE compras (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    usuario INT NOT NULL,
+    usuario VARCHAR(100) NOT NULL,
     lote INT NOT NULL,
     data_compra DATE NOT NULL,
-    FOREIGN KEY (usuario) REFERENCES usuarios(id),
+    FOREIGN KEY (usuario) REFERENCES usuarios(nome),
     FOREIGN KEY (lote) REFERENCES lotes(id)
 );
 
@@ -54,7 +53,7 @@ VALUES
 
 INSERT INTO lotes (valor, indice_qualidade, anunciante, cidade, descricao, disponivel, imagem)
 VALUES
-    (50000.00, 2.5, 'Maria Antonieta', 'Florianópolis', '10 cabeças de gado disponíveis para compra em Florianópolis, SC', 1, '/assets/Lotes/Gado1.jpg'),
+    (50000.00, 2.5, 'Maria Antonieta', 'Florianópolis', '10 cabeças de gado disponíveis para compra em Florianópolis, SC', 2, '/assets/Lotes/Gado1.jpg'),
     (300000.00, 4.5, 'Ana Julia', 'Vacaria', '50 cabeças de gado em ótimo estado para compra em Vacaria, RS', 1, '/assets/Lotes/Gado2.jpg'),
     (45000.00, 4.5, 'Meryl Streep', 'Viamão', '8 cabeças de gado magro e dois bezerros disponíveis para compra em Viamão, RS', 1, '/assets/Lotes/Gado3.jpg'),
     (5000.00, 5.0, 'Luciana', 'Santa Cruz do Sul', 'Cabeça de gado única disponível para compra em Santa Cruz do Sul, RS', 1, '/assets/Lotes/Gado4.jpg'),
@@ -130,3 +129,6 @@ VALUES
     ('GHJK-PLOP', 35000.00, FALSE),
     ('ZERT-QWOP', 80000.00, FALSE);
     
+INSERT INTO compras (usuario, lote, data_compra)
+VALUES
+    ('Nathan Mattes', 1, '2021-06-01');

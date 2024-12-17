@@ -28,7 +28,7 @@ const StarRating = ({ rating }) => {
   );
 };
 
- 
+
 
 export default function Lotes() {
   const [error, setError] = useState(''); // Estado para mensagens de erro
@@ -64,64 +64,73 @@ export default function Lotes() {
   };
 
   const confirmPurchase = async (event) => {
-    console.log(selectedLote.valor);
-    if(parseFloat(userData.saldo) >= parseFloat(selectedLote.valor)){
+    if (!selectedLote) {
+      alert("Nenhum lote selecionado.");
+      return;
+    }
+    if (!userData) {
+      alert("Dados do usuário não carregados.");
+      return;
+    }
+    if (selectedLote) {
+      console.log(selectedLote.valor);
+    }
+    if (parseFloat(userData.saldo) >= parseFloat(selectedLote.valor)) {
       const { id } = selectedLote; // Obtém o ID do lote selecionado
       const formData = new FormData();
-      formData.append("usuario",userData.nome);
-      formData.append("lote",selectedLote.id);
-      const d = new Date();
-      formData.append("data_compra",d);
+      formData.append("usuario", userData.nome);
+      formData.append("lote", selectedLote.id);
+      formData.append("data_compra", '2024-12-17'); // Corrigido
       try {
-        const response = await fetch('/api/compras', {
-            method: 'POST',
-            body: formData,
+        const response = await fetch('/api/routeCompra', {
+          method: 'POST',
+          body: formData,
         });
 
         if (response.ok) {
-            const data = await response.json();
-            alert("Compra registrada com sucesso!");
+          const data = await response.json();
+          alert("Compra registrada com sucesso!");
         } else {
-            const errorData = await response.json();
-            setError(errorData.error || "Erro ao registrar compra");
+          const errorData = await response.json();
+          setError(errorData.error || "Erro ao registrar compra");
         }
-    } catch (error) {
+      } catch (error) {
         console.error(error);
         setError("Erro ao conectar ao servidor");
-    }
+      }
       // Atualiza o status do lote para 1 (aprovado)
-    fetch("http://localhost:5000/api/atualizar-disponibilidade", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: id, // Passa o ID do lote selecionado
-        disponivel: 1, // Marca o lote como aprovado
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Erro ao atualizar status do lote. Status: ${response.status}`);
-        }
-        return response.json();
+      fetch("http://localhost:5000/api/atualizar-disponibilidade", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: id, // Passa o ID do lote selecionado
+          disponivel: 1, // Marca o lote como aprovado
+        }),
       })
-      .then(() => {
-        // Atualiza o estado local para remover o lote aprovado da lista de lotes disponíveis
-        setFilteredBanners((prevBanners) =>
-          prevBanners.filter((banner) => banner.id !== id)
-        );
-        alert("Compra bem Sucedida!");
-        setSelectedLote(null); // Desmarcar o lote após aprovação
-      })
-      .catch((error) => {
-        console.error("Erro ao atualizar status do lote:", error);
-        alert("Erro ao atualizar status do lote.");
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Erro ao atualizar status do lote. Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(() => {
+          // Atualiza o estado local para remover o lote aprovado da lista de lotes disponíveis
+          setFilteredBanners((prevBanners) =>
+            prevBanners.filter((banner) => banner.id !== id)
+          );
+          alert("Compra bem Sucedida!");
+          setSelectedLote(null); // Desmarcar o lote após aprovação
+        })
+        .catch((error) => {
+          console.error("Erro ao atualizar status do lote:", error);
+          alert("Erro ao atualizar status do lote.");
+        });
 
       alert(`Compra confirmada`);
       closePopup();
-    }else{
+    } else {
       alert('Saldo insuficiente');
       closePopup();
     }

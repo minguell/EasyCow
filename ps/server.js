@@ -161,12 +161,12 @@ app.get('/api/giftcard', (req, res) => {
   });
 });
 
-app.post('/api/compras', (req, res) => {
-  const { usuario, lote, data_compra} = req.query;
+app.post('/api/comprar', (req, res) => {
+  const { usuario, anunciante, data_compra} = req.query;
 
-  const query = 'INSERT INTO compras (usuario, lote, data_compra) VALUES (?, ?, ?)';
+  const query = 'INSERT INTO compras (usuario, anunciante, data_compra) VALUES (?, ?, ?)';
   
-  db.query(query, [usuario, lote, data_compra], (err, results) => {
+  db.query(query, [usuario, anunciante, data_compra], (err, results) => {
     if (err) {
       res.status(500).json({ mensagem: 'Erro ao registrar compra', erro: err });
     } else {
