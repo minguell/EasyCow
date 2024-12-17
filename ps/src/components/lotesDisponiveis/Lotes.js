@@ -5,6 +5,7 @@ import styles from './Lotes.module.css';
 import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import Image from 'next/image';
 import Comprar from '../Comprar/Comprar';
+import Comentar from '../Comentar/Comentar';
 
 import Gado1 from "@/assets/Lotes/gado1.jpg";
 import Gado2 from "@/assets/Lotes/gado2.jpg";
@@ -127,6 +128,7 @@ export default function Lotes() {
   const [selectedLote, setSelectedLote] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isComprarOpen, setIsComprarOpen] = useState(false);
+  const [isCommentOpen, setIsCommentOpen] = useState(false);
 
   const openPopup = (lote) => {
     setSelectedLote(lote);
@@ -135,10 +137,16 @@ export default function Lotes() {
   const closePopup = () => {
     setSelectedLote(null);
     setIsComprarOpen(false);
+    setIsCommentOpen(false);
   };
 
   const confirmPurchase = () => {
     alert(`Compra confirmada para o lote: ${selectedLote.nome}`);
+    closePopup();
+  };
+
+  const confirmComment = () => {
+    alert(`Criação de comentário confirmada para o lote: ${selectedLote.nome}`);
     closePopup();
   };
 
@@ -225,6 +233,12 @@ export default function Lotes() {
                 >
                   Comprar
                 </button>
+                <button
+                  className={styles.comentarButton}
+                  onClick={() => setIsCommentOpen(true)}
+                >
+                  Comentar
+                </button>
               </div>
             </div>
           </div>
@@ -235,6 +249,11 @@ export default function Lotes() {
         isOpen={isComprarOpen}
         onClose={() => setIsComprarOpen(false)}
         onConfirm={confirmPurchase}
+      />
+      <Comentar
+        isOpen={isCommentOpen}
+        onClose={() => setIsCommentOpen(false)}
+        onConfirm={confirmComment}
       />
     </section>
   );

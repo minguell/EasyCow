@@ -1,0 +1,78 @@
+.popupOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .popupContent {
+    background: #c9ffb3;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+    height: 90%;
+    max-height: 400px;
+  }
+  
+  .popupContent p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .commentBox {
+    max-width: 640px;
+    height: 310px;
+    background-color: #d0e2bc;
+    padding: 10px;
+    border: 3px dashed #8ebf42;
+    font: 1.4em/1.6em cursive;
+    color: #095484;
+  }
+
+  .commentTitle {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  .commentForm {
+    padding: 20px;
+  }
+  
+  .commentInput {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 1px solid #ccc;
+  }
+  
+  .commentSubmit {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .closeButton {
+    position: relative;
+    top: -10px;
+    left: 280px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+  }
