@@ -65,6 +65,22 @@ app.get('/api/usuario', (req, res) => {
   });
 });
 
+// Rota para cadastrar lote
+app.post('/api/lotes', (req, res) => {
+  const { nome, cidade, descrição, preço } = req.body;
+
+
+  const query = 'INSERT INTO lotes (anunciante, cidade, valor, descricao) VALUES (?, ?, ?, ?)';
+  
+  db.query(query, [nome, cidade, preço, descrição], (err, results) => {
+    if (err) {
+      res.status(500).json({ mensagem: 'Erro ao registrar lote', erro: err });
+    } else {
+      res.status(201).json({ mensagem: 'Lote registrado com sucesso!', userId: results.insertId });
+    }
+  });
+});
+
 // Rota para buscar informações de um gift card pelo código
 app.get('/api/giftcard', (req, res) => {
   const { codigo } = req.query;
@@ -88,9 +104,6 @@ app.get('/api/giftcard', (req, res) => {
     res.json(results[0]); // Retorna o gift card encontrado
   });
 });
-
-
-
 
 
 // Inicia o servidor

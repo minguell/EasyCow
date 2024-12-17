@@ -40,8 +40,8 @@ export default function Conta() {
           src={userData.foto}
           alt="Imagem do usuário"
           classname={styles.profileImage}
-          width={200}
-          height={200}
+          width={300}
+          height={300}
         />
 
         <h2 className={styles.fullName}>{userData.nome}</h2>
