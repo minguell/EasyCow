@@ -8,7 +8,7 @@
 }
 
 .createContainer > h1 {
-    color: black;
+    color: rgb(0, 0, 0);
     margin-bottom: 2vh;
 }
 
@@ -23,6 +23,7 @@
 .groupInputs > input {
     width: 70%;
     height: 4vh;
+    border-radius: 10px;
 }
 
 .groupInputs label {
@@ -33,6 +34,7 @@
     margin-top: 3vh;
     color: black;
     width: 30%;
+    border-radius: 10px;
 }
 
 .form input[type=file]{
@@ -50,6 +52,7 @@
     text-align: center;
     padding-right: 1.5vw;
     padding-left: 1.5vw;
+    border-radius: 10px;
 }
 
 .form {

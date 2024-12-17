@@ -22,16 +22,16 @@ export default function Venda({ token, isAdmin }) {
             </div>
 
             <div className={styles.groupInputs}>
-                <label htmlFor="descrição">Descrição</label>
+                <label htmlFor="descrição">Descrição:</label>
                 <input type="textbox" name="descrição" id="descrição" />
             </div>
 
             <div className={styles.groupInputs}>
-                <label htmlFor="preço">Preço</label>
-                <input type="number" name="preço" id="preço" />
+                <label htmlFor="preço">Preço:</label>
+                <input type="number" placeholder="0.0" step="0.01" min="0" name="preço" id="preço" />
             </div>
 
-            <div className={styles.groupInputs}>
+            <div className={styles.groupInputs} >
                 <label htmlFor="imageUpload">Imagem:</label>
                 <input type="file" id="imageUpload" name="image" accept="image/*" />
             </div>
