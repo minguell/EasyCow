@@ -39,7 +39,7 @@ export default function Conta() {
         <Image
           src={userData.foto}
           alt="Imagem do usuário"
-          classname={styles.profileImage}
+          className={styles.profileImage}
           width={300}
           height={300}
         />
@@ -51,13 +51,6 @@ export default function Conta() {
         <p><strong>Data de nascimento:</strong> {new Date(userData.data_nascimento).toLocaleDateString()}</p>
         <p><strong>Email:</strong> {userData.email}</p>
         <p><strong>Saldo:</strong> {userData.saldo}</p>
-      </div>
-
-      <div className={styles.historySection}>
-        <h3>Histórico de Compras</h3>
-        <ul className={styles.historyList}>
-          <li>Em breve...</li>
-        </ul>
       </div>
     </div>
   );

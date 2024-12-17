@@ -65,6 +65,46 @@ app.get('/api/usuario', (req, res) => {
   });
 });
 
+// rota para atualizar o saldo do usuário
+app.post('/api/atualizar-saldo', (req, res) => {
+  const { nome, valor } = req.body;
+
+  if (!nome || !valor) {
+    return res.status(400).json({ mensagem: 'Nome e valor são obrigatórios.' });
+  }
+
+  const query = 'UPDATE usuarios SET saldo = saldo + ? WHERE nome = ?';
+
+  db.query(query, [valor, nome], (err, results) => {
+    if (err) {
+      console.error('Erro ao atualizar saldo:', err);
+      return res.status(500).json({ mensagem: 'Erro ao atualizar saldo.' });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+    }
+
+    res.json({ mensagem: 'Saldo atualizado com sucesso!' });
+  });
+});
+
+// Rota para atualizar o gift card
+app.post('/api/atualizar-codigo', (req, res) => {
+  const { codigo, usado } = req.body;
+
+  // Atualize o status do código no banco de dados para 'usado'
+  const query = 'UPDATE gift_cards SET usado = ? WHERE codigo = ?';
+  db.query(query, [usado, codigo], (err, result) => {
+    if (err) {
+      res.status(500).json({ mensagem: 'Erro ao atualizar o código.' });
+    } else {
+      res.status(200).json({ mensagem: 'Código atualizado com sucesso.' });
+    }
+  });
+});
+
+
 // Rota para cadastrar lote
 app.post('/api/lotes', (req, res) => {
   const { nome, cidade, descrição, preço } = req.body;
