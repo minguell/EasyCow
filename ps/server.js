@@ -89,6 +89,22 @@ app.post('/api/atualizar-saldo', (req, res) => {
   });
 });
 
+// Rota para atualizar o gift card
+app.post('/api/atualizar-codigo', (req, res) => {
+  const { codigo, usado } = req.body;
+
+  // Atualize o status do código no banco de dados para 'usado'
+  const query = 'UPDATE gift_cards SET usado = ? WHERE codigo = ?';
+  db.query(query, [usado, codigo], (err, result) => {
+    if (err) {
+      res.status(500).json({ mensagem: 'Erro ao atualizar o código.' });
+    } else {
+      res.status(200).json({ mensagem: 'Código atualizado com sucesso.' });
+    }
+  });
+});
+
+
 // Rota para buscar informações de um gift card pelo código
 app.get('/api/giftcard', (req, res) => {
   const { codigo } = req.query;

@@ -1,3 +1,4 @@
+// Creditos.js
 "use client";
 
 import React, { useState } from "react";
@@ -7,6 +8,7 @@ const Creditos = () => {
   const limitChars = 9; // Tamanho correto do código, incluindo o hífen
   const [code, setCode] = useState("");
   const [credit, setCredit] = useState(null); // Crédito retornado pelo backend
+  const token = localStorage.getItem("authToken");
 
   const handleInputChange = (e) => {
     setCode(e.target.value);
@@ -44,7 +46,7 @@ const Creditos = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              nome: "Nathan Mattes", // Nome do usuário
+              nome: token, // Nome do usuário
               valor: data.valor, // Crédito recebido
             }),
           })
@@ -56,8 +58,32 @@ const Creditos = () => {
             })
             .then((updateData) => {
               alert(updateData.mensagem); // Exibe mensagem de sucesso
-              // Recarrega a página para atualizar o saldo na conta
-              window.location.reload();
+
+              // Atualiza o status do código de gift card para 'usado' (1)
+              fetch("http://localhost:5000/api/atualizar-codigo", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  codigo: code, // Código que foi usado
+                  usado: 1, // Marca o código como utilizado
+                }),
+              })
+                .then((response) => {
+                  if (!response.ok) {
+                    throw new Error("Erro ao atualizar status do código.");
+                  }
+                  return response.json();
+                })
+                .then(() => {
+                  // Recarrega a página para atualizar o saldo na conta
+                  window.location.reload();
+                })
+                .catch((error) => {
+                  console.error("Erro ao atualizar status do código:", error);
+                  alert("Erro ao atualizar status do código.");
+                });
             })
             .catch((error) => {
               console.error("Erro ao atualizar saldo:", error);
