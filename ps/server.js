@@ -104,6 +104,22 @@ app.post('/api/atualizar-codigo', (req, res) => {
   });
 });
 
+// Rota para atualizar a disponibilidade do lote
+app.post('/api/atualizar-disponibilidade', (req, res) => {
+  const { id, disponivel } = req.body;
+  console.log(req.body); // Log do corpo recebido
+
+  // Atualize o status do código no banco de dados para 'usado'
+  const query = 'UPDATE lotes SET disponivel = ? WHERE id = ?';
+  db.query(query, [disponivel, id], (err, result) => {
+    if (err) {
+      res.status(500).json({ mensagem: 'Erro ao atualizar disponibilidade.' });
+    } else {
+      res.status(200).json({ mensagem: 'Disponibilidade atualizada com sucesso.' });
+    }
+  });
+});
+
 
 // Rota para cadastrar lote
 app.post('/api/lotes', (req, res) => {
