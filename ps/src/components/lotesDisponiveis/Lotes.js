@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import styles from './Lotes.module.css';
-import { useRouter } from 'next/navigation';
 
 export default function Lotes() {
-  const router = useRouter(); // Hook para controle de navegação
   const [error, setError] = useState(''); // Estado para mensagens de erro
 
   const [selectedLote, setSelectedLote] = useState(null);
@@ -19,21 +17,17 @@ export default function Lotes() {
     //const pesquisa = event.target.elements.pesquisa.value;
 
     const formData = new FormData();
-    formData.append("pesquisa", searchTerm);
-
+    formData.append("pesquisa",searchTerm);
 
     try {
       const response = await fetch('/api/routeLotes', {
         method: 'POST',
         body: formData,
       });
-
       if (response.ok) {
         const data = await response.json();
-        alert("lotes carregados com sucesso!");
         setFilteredBanners(data); // Carrega os lotes
         console.log(filteredBanners);
-        //router.push('/lotesPage'); // Redireciona para a página de lotes
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Erro ao carregar lotes");
@@ -46,8 +40,6 @@ export default function Lotes() {
     }
 
   };
-
-
 
   return (
     <section id="lotes">

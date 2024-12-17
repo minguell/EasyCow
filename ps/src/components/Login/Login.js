@@ -38,7 +38,6 @@ export default function Login() {
 
       if (response.ok) {
         const data = await response.json();
-        alert("login realizado com sucesso!");
         router.push('/lotesPage'); // Redireciona para a página de lotes
       } else {
         const errorData = await response.json();
