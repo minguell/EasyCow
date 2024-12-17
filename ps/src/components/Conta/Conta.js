@@ -36,13 +36,14 @@ export default function Conta() {
   return (
     <div className={styles.overlay}>
       <div className={styles.profileSection}>
-        <Image 
-          src={userData.foto} 
-          alt="Foto de Perfil" 
-          className={styles.profileImage} 
-          width={300} 
-          height={300} 
+        <Image
+          src={userData.foto}
+          alt="Imagem do usuário"
+          classname={styles.profileImage}
+          width={200}
+          height={200}
         />
+
         <h2 className={styles.fullName}>{userData.nome}</h2>
       </div>
 

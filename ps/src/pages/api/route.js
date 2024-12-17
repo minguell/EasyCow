@@ -25,7 +25,7 @@ export const config = {
 const handler = async (req, res) => {  // Adicione 'res' como parâmetro
   if (req.method === 'POST') {
     const form = new IncomingForm({
-      uploadDir: path.join(process.cwd(), 'uploads'),
+      uploadDir: path.join(process.cwd(), 'public/assets/Usuarios'),
       keepExtensions: true
     });
 
@@ -41,7 +41,7 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
 
         try {
           const { username, email, date, password } = fields;
-          const filePath = files.image && files.image[0]?.filepath ? path.basename(files.image[0].filepath) : null;
+          const filePath = files.image && files.image[0]?.filepath ? '/assets/Usuarios/' + path.basename(files.image[0].filepath) : null;
 
           if (!filePath) {
             console.error('Erro: Nenhuma imagem enviada');
