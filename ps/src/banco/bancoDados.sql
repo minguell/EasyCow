@@ -17,7 +17,7 @@ CREATE TABLE lotes (
     indice_qualidade FLOAT NOT NULL,
     descricao TEXT NOT NULL,
     imagem VARCHAR(255) NOT NULL,
-    disponivel INT NOT NULL,
+    disponivel INT NOT NULL DEFAULT 2, 
     FOREIGN KEY (anunciante) REFERENCES usuarios(nome) 
 );
 

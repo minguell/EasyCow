@@ -41,8 +41,8 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
 
         try {
           const {anunciante, indice, cidade, preço, descricao } = fields;
-          const filePath = files.image && files.image[0]?.filepath ? '/assets/Lotes/' + path.basename(files.image[0].filepath) : null;
-         
+          const filePath = files.image && files.image[0]?.filepath ? '/assets/Lotes' + path.basename(files.image[0].filepath) : null;
+          const disponivel = 0;
 
           if (!filePath) {
             console.error('Erro: Nenhuma imagem enviada');
@@ -53,8 +53,8 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
 
           // Salva no banco de dados
           const [result] = await db.query(
-            'INSERT INTO lotes (anunciante, indice_qualidade, cidade, valor, descricao, imagem) VALUES (?, ?, ?, ?, ?, ?)',
-            [anunciante, indice, cidade, preço, descricao, filePath]
+            'INSERT INTO lotes (anunciante, indice_qualidade, cidade, valor, descricao, imagem, disponivel) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            [anunciante, indice, cidade, preço, descricao, filePath, disponivel]
           );
 
           console.log('Lote registrado com ID:', result.insertId);

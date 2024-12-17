@@ -97,7 +97,7 @@ export default function Lotes() {
       },
       body: JSON.stringify({
         id: id, // Passa o ID do lote selecionado
-        disponivel: 2, // Marca o lote como aprovado
+        disponivel: 1, // Marca o lote como aprovado
       }),
     })
       .then((response) => {
