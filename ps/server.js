@@ -65,6 +65,31 @@ app.get('/api/usuario', (req, res) => {
   });
 });
 
+// Rota para buscar informações de um gift card pelo código
+app.get('/api/giftcard', (req, res) => {
+  const { codigo } = req.query;
+
+  if (!codigo) {
+    return res.status(400).json({ mensagem: 'Código do gift card não fornecido.' });
+  }
+
+  const query = 'SELECT codigo, valor, usado FROM gift_cards WHERE codigo = ?';
+
+  db.query(query, [codigo], (err, results) => {
+    if (err) {
+      console.error('Erro ao buscar dados do gift card:', err);
+      return res.status(500).json({ mensagem: 'Erro ao buscar dados do gift card.' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ mensagem: 'Gift card não encontrado.' });
+    }
+
+    res.json(results[0]); // Retorna o gift card encontrado
+  });
+});
+
+
 
 // Inicia o servidor
 const PORT = 5000;
