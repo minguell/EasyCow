@@ -58,7 +58,7 @@ export default function Lotes() {
           <div className={styles.container}>
             <div className={styles.searchContainer}>
               <h2>LOTES DISPONÍVEIS:</h2>
-              <form onSubmit={loadLotes}>
+              <form className={styles.form} onSubmit={loadLotes}>
                 <input
                   type="text"
                   placeholder="Pesquisar lotes..."
@@ -66,8 +66,9 @@ export default function Lotes() {
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className={styles.searchInput}
                 />
-                <button type="submit">Pesquisar</button>
+                <button className={styles.searchButton} type="submit">Pesquisar</button>
               </form>
+            </div>
               <div className="row" style={{ justifyContent: 'center' }}>
                 {filteredBanners.length > 0 ? (
                   filteredBanners.map((banner) => (
@@ -90,7 +91,7 @@ export default function Lotes() {
                   <p>Nenhum lote encontrado</p>
                 )}
               </div>
-            </div>
+            
           </div>
         </div>
       )}
