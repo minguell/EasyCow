@@ -3,6 +3,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Conta from "../../components/Conta/Conta";
+import Vendidos from "../../components/Vendidos/Vendidos";
+import Anunciados from "../../components/Anunciados/Anunciados";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 
@@ -32,6 +34,8 @@ export default function ContaPage() {
     <div>
       <NavBar />
       <Conta  />
+      <Anunciados />
+      <Vendidos />
       <Footer />
     </div>
   );
