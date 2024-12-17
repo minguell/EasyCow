@@ -2,10 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import styles from './Lotes.module.css';
-import { useRouter } from 'next/navigation';
 
 export default function Lotes() {
-  const router = useRouter(); // Hook para controle de navegação
   const [error, setError] = useState(''); // Estado para mensagens de erro
 
   const [selectedLote, setSelectedLote] = useState(null);
@@ -24,7 +22,6 @@ export default function Lotes() {
         method: 'POST',
         body: formData,
       });
-
       if (response.ok) {
         const data = await response.json();
         alert("Lotes carregados com sucesso!");
