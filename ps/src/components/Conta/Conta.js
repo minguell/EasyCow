@@ -39,7 +39,7 @@ export default function Conta() {
         <Image
           src={userData.foto}
           alt="Imagem do usuário"
-          classname={styles.profileImage}
+          className={styles.profileImage}
           width={200}
           height={200}
         />
