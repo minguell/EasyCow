@@ -81,6 +81,7 @@ export default function Lotes() {
       formData.append("usuario", userData.nome);
       formData.append("lote", selectedLote.id);
       formData.append("data_compra", '2024-12-17'); // Corrigido
+
       try {
         const response = await fetch('/api/routeCompra', {
           method: 'POST',
@@ -106,7 +107,7 @@ export default function Lotes() {
         },
         body: JSON.stringify({
           id: id, // Passa o ID do lote selecionado
-          disponivel: 1, // Marca o lote como aprovado
+          disponivel: 2, // Marca o lote como aprovado
         }),
       })
         .then((response) => {
@@ -127,6 +128,32 @@ export default function Lotes() {
           console.error("Erro ao atualizar status do lote:", error);
           alert("Erro ao atualizar status do lote.");
         });
+        let novoSaldo = parseFloat(userData.saldo) - parseFloat(selectedLote.valor);
+        let saldo = parseFloat(userData.saldo) - novoSaldo;
+        // Faz uma requisição para atualizar o saldo do usuário no backend
+        fetch("http://localhost:5000/api/atualizar-saldo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nome: userData.nome, // Nome do usuário
+            valor: -saldo, // Crédito recebido
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Erro ao atualizar o saldo.");
+            }
+            return response.json();
+          })
+          .then((updateData) => {
+            alert(updateData.mensagem); // Exibe mensagem de sucesso
+          })
+          .catch((error) => {
+            console.error("Erro ao atualizar saldo:", error);
+            alert("Erro ao atualizar saldo.");
+          });
 
       alert(`Compra confirmada`);
       closePopup();

@@ -38,7 +38,7 @@ const handler = async (req, res) => {
         try {
           const { pesquisa } = fields;
 
-          const query = `SELECT * FROM lotes WHERE anunciante LIKE ? OR cidade LIKE ? OR descricao LIKE ?`;
+          const query = `SELECT * FROM lotes WHERE (anunciante LIKE ? OR cidade LIKE ? OR descricao LIKE ?)`;
           const valores = ['%' + pesquisa + '%', '%' + pesquisa + '%', '%' + pesquisa + '%'];
 
 

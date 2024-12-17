@@ -14,30 +14,30 @@ export default function Comprar({ isOpen, onClose, onConfirm }) {
 
   const DoCompra = async (event) => {
     event.preventDefault();
-
-    const usuario = localStorage.getItem("authToken");
-    const lote = event.target.elements.anunciante.value;
-    const data_compra = '2024-12-17';  // Corrigido
-
-    if (!comprador) {
+  
+    const usuario = localStorage.getItem("authToken");  // Definir o 'comprador' corretamente
+    const anunciante = event.target.elements.anunciante.value;
+    const data_compra = '2024-12-17';  // Definir a data corretamente
+  
+    if (!usuario) {  // Verificar se o usuário está logado
       setError("Você precisa estar logado para realizar uma compra.");
       return;
     }
-
+  
     // Cria o objeto FormData para enviar os dados ao servidor
     const formData = new FormData();
-    formData.append("comprador", usuario);
-    formData.append("anunciante", lote);
+    formData.append("comprador", usuario);  // Enviar 'comprador' no lugar de 'usuario'
+    formData.append("anunciante", anunciante);
     formData.append("data_compra", data_compra);
-
+  
     console.log(formData);
-
+  
     try {
       const response = await fetch('/api/routeCompra', {
         method: 'POST',
         body: formData,
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         alert("Compra registrada com sucesso!");
@@ -51,6 +51,7 @@ export default function Comprar({ isOpen, onClose, onConfirm }) {
       setError("Erro ao conectar ao servidor");
     }
   };
+  
 
   return (
     <div className={styles.popupOverlay}>
