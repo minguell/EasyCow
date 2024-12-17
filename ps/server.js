@@ -49,7 +49,7 @@ app.get('/api/usuario', (req, res) => {
     return res.status(400).json({ mensagem: 'Nome não fornecido.' });
   }
 
-  const query = 'SELECT nome, data_nascimento, email, foto FROM usuarios WHERE nome = ?';
+  const query = 'SELECT nome, data_nascimento, email, saldo, foto FROM usuarios WHERE nome = ?';
 
   db.query(query, [nome], (err, results) => {
     if (err) {

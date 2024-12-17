@@ -45,7 +45,7 @@ VALUES
     ('Maria Antonieta', '2000-01-01', 'maria@email.com', 'senha123', 0.00, '/assets/Usuarios/Maria.png'),
     ('Meryl Streep', '2000-01-01', 'meryl@email.com', 'senha123', 0.00, '/assets/Usuarios/Meryl.png'),
     ('Miguel Dutra', '2000-01-01', 'miguel@email.com', 'senha123', 0.00, '/assets/Usuarios/Miguel.png'),
-    ('Nathan Mattes', '2000-01-01', 'nathan@email.com', 'senha123', 0.00, '/assets/Usuarios/Nathan.png');
+    ('Nathan Mattes', '2000-01-01', 'nathan@email.com', 'senha123', 10.00, '/assets/Usuarios/Nathan.png');
 
 
 INSERT INTO lotes (valor, indice_qualidade, anunciante, cidade, descricao, imagem)

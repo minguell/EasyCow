@@ -51,6 +51,7 @@ export default function Conta() {
       <div className={styles.infoSection}>
         <p><strong>Data de nascimento:</strong> {new Date(userData.data_nascimento).toLocaleDateString()}</p>
         <p><strong>Email:</strong> {userData.email}</p>
+        <p><strong>Saldo:</strong> {userData.saldo}</p>
       </div>
 
       <div className={styles.historySection}>
