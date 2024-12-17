@@ -6,12 +6,11 @@ export default function Conta() {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("authToken"); // Usando o nome do usuário como token aqui.
-  const fakeToken = "Nathan Mattes"
 
   useEffect(() => {
     if (!token) return;
 
-    fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(fakeToken)}`)
+    fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(token)}`)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao buscar dados do usuário");
         return response.json();
