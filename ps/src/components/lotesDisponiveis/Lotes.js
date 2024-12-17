@@ -119,7 +119,7 @@ export default function Lotes() {
         alert("Erro ao atualizar status do lote.");
       });
 
-      alert(`Compra confirmada para o lote: ${selectedLote.nome}`);
+      alert(`Compra confirmada`);
       closePopup();
     }else{
       alert('Saldo insuficiente');
@@ -213,12 +213,11 @@ export default function Lotes() {
               <div className={styles.popupImageContainer}>
                 <img
                   src={selectedLote.imagem}
-                  alt={`Imagem Lote ${selectedLote.nome}`}
+                  alt={`Imagem Lote ${selectedLote}`}
                   className={styles.popupImage}
                 />
               </div>
               <div className={styles.popupInfo}>
-                <h2>{selectedLote.nome}</h2>
                 <p><strong>Cidade:</strong> {selectedLote.cidade}</p>
                 <p><strong>Descrição:</strong> {selectedLote.descricao}</p>
                 <p><strong>Anunciante:</strong> {selectedLote.anunciante}</p>
