@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Conta.module.css";
 import Image from "next/image";
-import ProfilePic from "../../assets/Usuarios/Ana.png";
 
 export default function Conta() {
   const [userData, setUserData] = useState(null);

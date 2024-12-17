@@ -1,45 +1,54 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Creditos.module.css";
 
 const Creditos = () => {
-  var limitChars = 10;
-  var credit = 1000;
+  const limitChars = 9; // Tamanho correto do código, incluindo o hífen
   const [code, setCode] = useState("");
-  const [token, setToken] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    // Acessa o token do localStorage
-    const storedToken = localStorage.getItem("authToken");
-    if (storedToken) {
-      setToken(storedToken); // Atualiza o estado com o token
-      if (storedToken !== 'admin') {
-        setIsAdmin(true); // Define isAdmin como true se o token for 'admin'
-      }
-    }
-  }, []);
+  const [credit, setCredit] = useState(null); // Crédito retornado pelo backend
 
   const handleInputChange = (e) => {
     setCode(e.target.value);
   };
 
   const handleSubmit = () => {
-    const codeRegex = new RegExp(`^.{${limitChars}}$`); // Interpolação do valor de limitChars
 
+    const codeRegex = new RegExp(`^.{${limitChars}}$`); // Verifica tamanho exato do código
+
+    // Validação para garantir que o código tenha exatamente 9 caracteres
     if (!codeRegex.test(code)) {
       alert("O código deve conter exatamente " + limitChars + " caracteres.");
       return;
     }
 
-    alert(`Código enviado: ${code}` + "\nCrédito recebido: " + credit);
-    setCode("");
-  };
 
-  if (!isAdmin) {
-    return <div>Acesso negado</div>;
-  }
+    // Faz uma requisição ao backend para buscar o crédito do código
+    fetch(`http://localhost:5000/api/giftcard?codigo=${encodeURIComponent(code)}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Código inválido ou erro ao acessar a API");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Logando a resposta da API para verificar o que é retornado
+        console.log("Resposta da API:", data);
+        if (data.mensagem) {
+          alert(data.mensagem); // Mostra mensagem de erro, se houver
+        } else if (data.usado) {
+          alert("Este código já foi utilizado.");
+        } else {
+          alert(`Código enviado: ${code}\nCrédito recebido: ${data.valor}`);
+          setCredit(data.valor); // Atualiza o estado com o crédito recebido
+          setCode(""); // Limpa o campo de entrada
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao buscar gift card:", error);
+        alert("Código inválido");
+      });
+  };
 
   return (
     <div className={styles.creditosContainer}>
