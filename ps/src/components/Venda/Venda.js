@@ -39,7 +39,7 @@ export default function Venda() {
             if (response.ok) {
                 const data = await response.json();
                 alert("Lote registrado com sucesso!");
-                router.push('/'); // Redireciona para a página de login
+                router.push('lotesPage'); // Redireciona para a página de lotes
             } else {
                 const errorData = await response.json();
                 setError(errorData.error || "Erro ao registrar lote");
@@ -65,7 +65,7 @@ export default function Venda() {
                 </div>
 
                 <div className={styles.groupInputs}>
-                    <label htmlFor="descricao">descrição:</label>
+                    <label htmlFor="descricao">Descrição:</label>
                     <input type="textbox" name="descricao" id="descricao" />
                 </div>
 
