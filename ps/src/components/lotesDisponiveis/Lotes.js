@@ -16,8 +16,6 @@ export default function Lotes() {
   const loadLotes = async (event) => {
     event.preventDefault();
 
-    //const pesquisa = event.target.elements.pesquisa.value;
-
     const formData = new FormData();
     formData.append("pesquisa", searchTerm);
 
@@ -33,7 +31,6 @@ export default function Lotes() {
         alert("lotes carregados com sucesso!");
         setFilteredBanners(data); // Carrega os lotes
         console.log(filteredBanners);
-        //router.push('/lotesPage'); // Redireciona para a página de lotes
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Erro ao carregar lotes");
