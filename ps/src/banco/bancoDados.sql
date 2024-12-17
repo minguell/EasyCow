@@ -54,15 +54,15 @@ VALUES
 
 INSERT INTO lotes (valor, indice_qualidade, anunciante, cidade, descricao, disponivel, imagem)
 VALUES
-    (50000.00, 2.5, (SELECT id FROM usuarios WHERE nome = 'Maria Antonieta'), 'Florianópolis', '10 cabeças de gado disponíveis para compra em Florianópolis, SC', '../assets/Lotes/Gado1.jpg'),
-    (300000.00, 4.5, (SELECT id FROM usuarios WHERE nome = 'Ana Julia'), 'Vacaria', '50 cabeças de gado em ótimo estado para compra em Vacaria, RS', '../assets/Lotes/Gado2.jpg'),
-    (45000.00, 4.5, (SELECT id FROM usuarios WHERE nome = 'Meryl Streep'), 'Viamão', '8 cabeças de gado magro e dois bezerros disponíveis para compra em Viamão, RS', '../assets/Lotes/Gado3.jpg'),
-    (5000.00, 5.0, (SELECT id FROM usuarios WHERE nome = 'Luciana'), 'Santa Cruz do Sul', 'Cabeça de gado única disponível para compra em Santa Cruz do Sul, RS', '../assets/Lotes/Gado4.jpg'),
-    (80000.00, 4.0, (SELECT id FROM usuarios WHERE nome = 'Angelo Oliveira'), 'Canasvieiras', '15 cabeças de gado disponíveis para compra em Canasvieiras, SC', '../assets/Lotes/Gado5.jpg'),
-    (55000.00, 5.0, (SELECT id FROM usuarios WHERE nome = 'Miguel Dutra'), 'Garopaba', '10 cabeças de gado disponíveis para compra em Garopaba, SC', '../assets/Lotes/Gado6.jpg'),
-    (15000.00, 3.5, (SELECT id FROM usuarios WHERE nome = 'Bruno Hofstetter'), 'Gramado', '3 cabeças de gado magro disponíveis para compra em Gramado, RS', '../assets/Lotes/Gado7.jpg'),
-    (20000.00, 4.5, (SELECT id FROM usuarios WHERE nome = 'Nathan Mattes'), 'Nova Petrópolis', '1 boi reprodutor disponível para compra em Nova Petrópolis, RS', '../assets/Lotes/Gado8.jpg'),
-    (50000.00, 4.0, (SELECT id FROM usuarios WHERE nome = 'Augusto Grohmann'), 'Bagé', '2 bois reprodutores disponíveis para compra em Bagé, RS', '../assets/Lotes/Gado9.jpg');
+    (50000.00, 2.5, 'Maria Antonieta', 'Florianópolis', '10 cabeças de gado disponíveis para compra em Florianópolis, SC', TRUE, '/assets/Lotes/Gado1.jpg'),
+    (300000.00, 4.5, 'Ana Julia', 'Vacaria', '50 cabeças de gado em ótimo estado para compra em Vacaria, RS', TRUE, '/assets/Lotes/Gado2.jpg'),
+    (45000.00, 4.5, 'Meryl Streep', 'Viamão', '8 cabeças de gado magro e dois bezerros disponíveis para compra em Viamão, RS', TRUE, '/assets/Lotes/Gado3.jpg'),
+    (5000.00, 5.0, 'Luciana', 'Santa Cruz do Sul', 'Cabeça de gado única disponível para compra em Santa Cruz do Sul, RS', TRUE, '/assets/Lotes/Gado4.jpg'),
+    (80000.00, 4.0, 'Angelo Oliveira', 'Canasvieiras', '15 cabeças de gado disponíveis para compra em Canasvieiras, SC', TRUE, '/assets/Lotes/Gado5.jpg'),
+    (55000.00, 5.0, 'Miguel Dutra', 'Garopaba', '10 cabeças de gado disponíveis para compra em Garopaba, SC', TRUE, '/assets/Lotes/Gado6.jpg'),
+    (15000.00, 3.5, 'Bruno Hofstetter', 'Gramado', '3 cabeças de gado magro disponíveis para compra em Gramado, RS', TRUE, '/assets/Lotes/Gado7.jpg'),
+    (20000.00, 4.5, 'Nathan Mattes', 'Nova Petrópolis', '1 boi reprodutor disponível para compra em Nova Petrópolis, RS', TRUE, '/assets/Lotes/Gado8.jpg'),
+    (50000.00, 4.0, 'Augusto Grohmann', 'Bagé', '2 bois reprodutores disponíveis para compra em Bagé, RS', TRUE, '/assets/Lotes/Gado9.jpg');
 
 INSERT INTO gift_cards (codigo, valor, usado)
 VALUES
