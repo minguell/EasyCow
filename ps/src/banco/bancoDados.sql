@@ -37,15 +37,15 @@ CREATE TABLE compras (
 
 INSERT INTO usuarios (nome, data_nascimento, email, senha, saldo, foto)
 VALUES
-    ('Ana Julia', '2000-01-01', 'ana@email.com', 'senha123', 0.00, '../assets/Usuarios/Ana.png'),
-    ('Angelo Oliveira', '2000-01-01', 'angelo@email.com', 'senha123', 0.00, '../assets/Usuarios/Angelo.png'),
-    ('Augusto Grohmann', '2000-01-01', 'augusto@email.com', 'senha123', 0.00, '../assets/Usuarios/Augusto.png'),
-    ('Bruno Hofstetter', '2000-01-01', 'bruno@email.com', 'senha123', 0.00, '../assets/Usuarios/Bruno.png'),
-    ('Luciana', '2000-01-01', 'luciana@email.com', 'senha123', 0.00, '../assets/Usuarios/Luciana.png'),
-    ('Maria Antonieta', '2000-01-01', 'maria@email.com', 'senha123', 0.00, '../assets/Usuarios/Maria.png'),
-    ('Meryl Streep', '2000-01-01', 'meryl@email.com', 'senha123', 0.00, '../assets/Usuarios/Meryl.png'),
-    ('Miguel Dutra', '2000-01-01', 'miguel@email.com', 'senha123', 0.00, '../assets/Usuarios/Miguel.png'),
-    ('Nathan Mattes', '2000-01-01', 'nathan@email.com', 'senha123', 0.00, '../assets/Usuarios/Nathan.png');
+    ('Ana Julia', '2000-01-01', 'ana@email.com', 'senha123', 0.00, '/assets/Usuarios/Ana.png'),
+    ('Angelo Oliveira', '2000-01-01', 'angelo@email.com', 'senha123', 0.00, '/assets/Usuarios/Angelo.png'),
+    ('Augusto Grohmann', '2000-01-01', 'augusto@email.com', 'senha123', 0.00, '/assets/Usuarios/Augusto.png'),
+    ('Bruno Hofstetter', '2000-01-01', 'bruno@email.com', 'senha123', 0.00, '/assets/Usuarios/Bruno.png'),
+    ('Luciana', '2000-01-01', 'luciana@email.com', 'senha123', 0.00, '/assets/Usuarios/Luciana.png'),
+    ('Maria Antonieta', '2000-01-01', 'maria@email.com', 'senha123', 0.00, '/assets/Usuarios/Maria.png'),
+    ('Meryl Streep', '2000-01-01', 'meryl@email.com', 'senha123', 0.00, '/assets/Usuarios/Meryl.png'),
+    ('Miguel Dutra', '2000-01-01', 'miguel@email.com', 'senha123', 0.00, '/assets/Usuarios/Miguel.png'),
+    ('Nathan Mattes', '2000-01-01', 'nathan@email.com', 'senha123', 10.00, '/assets/Usuarios/Nathan.png');
 
 
 INSERT INTO lotes (valor, indice_qualidade, anunciante, cidade, descricao, imagem)

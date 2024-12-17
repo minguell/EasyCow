@@ -2,10 +2,7 @@
 import React from "react";
 import styles from "./Venda.module.css";
 
-export default function Venda({ token, isAdmin }) {
-  if (!isAdmin) {
-    return <div>Acesso negado</div>; // Retorna mensagem de acesso negado se não for admin
-  }
+export default function Venda() {
 
   return (
     <div className={styles.createContainer}>
