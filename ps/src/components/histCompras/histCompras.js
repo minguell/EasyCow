@@ -1,33 +1,58 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from './histCompras.module.css';
+import styles from './HistCompras.module.css';
 
-export default function histCompras() {
+export default function HistCompras() {
   const [error, setError] = useState(''); // Estado para mensagens de erro
   const [selectedLote, setSelectedLote] = useState(null);
   const [filteredBanners, setFilteredBanners] = useState([]);
   const usuario = localStorage.getItem("authToken");
 
-  // Função para carregar os lotes
-  const loadLotes = async () => {
-    const formData = new FormData();
-    // Passa um valor de pesquisa vazio, pois a barra de pesquisa foi removida
-    formData.append("pesquisa", "");
+  // Função para buscar as compras do usuário
+  const fetchCompras = async () => {
+    try {
+      const response = await fetch(`/api/routeHistorico?usuario=${usuario}`, {
+        method: 'GET',
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        const lotesIds = data.map(compra => compra.lote); // Extrai os IDs dos lotes
+        console.log("IDs dos lotes obtidos:", lotesIds); // Log para visualizar os IDs
+        return lotesIds;
+      } else {
+        const errorData = await response.json();
+        setError(errorData.error || "Erro ao buscar compras");
+      }
+    } catch (error) {
+      console.error(error);
+      setError("Erro ao conectar ao servidor");
+    }
+    return [];
+  };
+
+ // Função para carregar os lotes com base nos IDs retornados
+const loadLotes = async () => {
+  const lotesIds = await fetchCompras(); // Busca os lotes pelas compras do usuário
+
+  if (lotesIds.length > 0) {
+    console.log("IDs sendo enviados para carregar os lotes:", lotesIds); // Log para ver os IDs enviados
 
     try {
-      const response = await fetch('/api/routeLotes', {
-        method: 'POST',
-        body: formData,
+      // Passando os IDs diretamente na URL
+      const response = await fetch(`/api/routeLotesById?ids=${encodeURIComponent(JSON.stringify(lotesIds))}`, {
+        method: 'GET', // Requisição GET
       });
+
       if (response.ok) {
         const data = await response.json();
 
-        // Filtrando os lotes para exibir apenas aqueles vendidos com banner.disponivel === 2
-        const availableBanners = data.filter(banner => banner.disponivel === 2 && banner.anunciante === usuario);
+        // Filtra os lotes para exibir apenas os que foram vendidos e correspondem ao usuário
+        const availableBanners = data.filter(banner => banner.disponivel === 2);
 
         setFilteredBanners(availableBanners); // Carrega os lotes disponíveis
-        console.log(availableBanners); // Verifique os lotes filtrados no console
+        console.log("Lotes disponíveis após filtro:", availableBanners); // Log para verificar os lotes filtrados
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Erro ao carregar lotes");
@@ -36,7 +61,11 @@ export default function histCompras() {
       console.error(error);
       setError("Erro ao conectar ao servidor");
     }
-  };
+  } else {
+    setError("Nenhuma compra encontrada para o usuário.");
+  }
+};
+
 
   // Usando useEffect para carregar os lotes automaticamente ao carregar a página
   useEffect(() => {
@@ -51,7 +80,7 @@ export default function histCompras() {
       {/* Exibe os lotes */}
       <div className={styles.lotesEmVenda}>
         <div className={styles.container}>
-          <h2>LOTES VENDIDOS:</h2>
+          <h2>LOTES COMPRADOS:</h2>
 
           {/* Renderiza os lotes ou mensagem de "Nenhum lote encontrado" */}
           <div className="row" style={{ justifyContent: 'center' }}>

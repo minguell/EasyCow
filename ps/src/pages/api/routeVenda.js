@@ -22,7 +22,7 @@ export const config = {
   api: { bodyParser: false },
 };
 
-const handler = async (req, res) => {  // Adicione 'res' como parâmetro
+const handler = async (req, res) => {  
   if (req.method === 'POST') {
     const form = new IncomingForm({
       uploadDir: path.join(process.cwd(), 'public/assets/Lotes'),
@@ -33,7 +33,7 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
       form.parse(req, async (err, fields, files) => {
         if (err) {
           console.error('Erro ao fazer o upload:', err);
-          return res.status(500).json({ error: 'Erro no upload do lote' }); // Usar res para responder
+          return res.status(500).json({ error: 'Erro no upload do lote' }); 
         }
 
         console.log('Campos recebidos:', fields);
@@ -46,7 +46,7 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
 
           if (!filePath) {
             console.error('Erro: Nenhuma imagem enviada');
-            return res.status(400).json({ error: 'Nenhuma imagem enviada' }); // Usar res para responder
+            return res.status(400).json({ error: 'Nenhuma imagem enviada' }); 
           }
 
           console.log('Preparando para salvar no banco de dados...');
@@ -59,16 +59,16 @@ const handler = async (req, res) => {  // Adicione 'res' como parâmetro
 
           console.log('Lote registrado com ID:', result.insertId);
 
-          return res.status(201).json({ message: 'Lote registrado com sucesso!', userId: result.insertId });  // Usar res para responder
+          return res.status(201).json({ message: 'Lote registrado com sucesso!', userId: result.insertId });  
         } catch (dbErr) {
           console.error('Erro ao registrar no banco de dados:', dbErr);
-          return res.status(500).json({ error: 'Erro ao registrar no banco' }); // Usar res para responder
+          return res.status(500).json({ error: 'Erro ao registrar no banco' }); 
         }
       });
     });
   }
 
-  return res.status(405).json({ error: 'Método não permitido' }); // Usar res para responder
+  return res.status(405).json({ error: 'Método não permitido' }); 
 };
 
 export default handler;

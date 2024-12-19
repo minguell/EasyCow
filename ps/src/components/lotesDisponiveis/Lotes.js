@@ -95,7 +95,7 @@ export default function Lotes() {
     }
     if (parseFloat(userData.saldo) >= parseFloat(selectedLote.valor)) {
       const { id } = selectedLote; // Obtém o ID do lote selecionado
-      
+
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
       var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -118,7 +118,6 @@ export default function Lotes() {
       
         if (response.ok) {
           const data = await response.json();
-          alert("Compra registrada com sucesso!");
         } else {
           const errorData = await response.json();
           setError(errorData.error || "Erro ao registrar compra");
@@ -151,7 +150,6 @@ export default function Lotes() {
           setFilteredBanners((prevBanners) =>
             prevBanners.filter((banner) => banner.id !== id)
           );
-          alert("Compra bem Sucedida!");
           setSelectedLote(null); // Desmarcar o lote após aprovação
         })
         .catch((error) => {

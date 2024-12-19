@@ -6,7 +6,7 @@ import Conta from "../../components/Conta/Conta";
 import Vendidos from "../../components/Vendidos/Vendidos";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
-import histCompras from "../../components/histCompras/histCompras";
+import HistCompras from "../../components/HistCompras/HistCompras";
 
 export default function ContaPage() {
   const [token, setToken] = useState("");
@@ -35,6 +35,7 @@ export default function ContaPage() {
       <NavBar />
       <Conta  />
       <Vendidos />
+      <HistCompras/>
       <Footer />
     </div>
   );
