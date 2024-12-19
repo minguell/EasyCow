@@ -39,6 +39,8 @@ app.post('/api/usuarios', (req, res) => {
       res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!' });
     }
   });
+
+  
 });
 
 // Rota para buscar informações do usuário pelo nome
@@ -67,6 +69,30 @@ app.get('/api/usuario', (req, res) => {
 
 // rota para atualizar o saldo do usuário
 app.post('/api/atualizar-saldo', (req, res) => {
+  const { nome, valor } = req.body;
+
+  if (!nome || !valor) {
+    return res.status(400).json({ mensagem: 'Nome e valor são obrigatórios.' });
+  }
+
+  const query = 'UPDATE usuarios SET saldo = ? WHERE nome = ?';
+
+  db.query(query, [valor, nome], (err, results) => {
+    if (err) {
+      console.error('Erro ao atualizar saldo:', err);
+      return res.status(500).json({ mensagem: 'Erro ao atualizar saldo.' });
+    }
+
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ mensagem: 'Usuário não encontrado.' });
+    }
+
+    res.json({ mensagem: 'Saldo atualizado com sucesso!' });
+  });
+});
+
+// rota para realizar ACRESCIMOS saldo do usuário
+app.post('/api/acrescimo-saldo', (req, res) => {
   const { nome, valor } = req.body;
 
   if (!nome || !valor) {

@@ -39,8 +39,10 @@ const Creditos = () => {
           alert(`Código enviado: ${code}\nCrédito recebido: ${data.valor}`);
           setCode(""); // Limpa o campo de entrada
 
+
+
           // Faz uma requisição para atualizar o saldo do usuário no backend
-          fetch("http://localhost:5000/api/atualizar-saldo", {
+          fetch("http://localhost:5000/api/acrescimo-saldo", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -38,6 +38,7 @@ export default function Lotes() {
   const [filteredBanners, setFilteredBanners] = useState([]);
   const [isComprarOpen, setIsComprarOpen] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [sellerData, setSellerData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [authStatus, setAuthStatus] = useState(null);
   const token = localStorage.getItem("authToken"); // Usando o nome do usuário como token aqui.
@@ -124,7 +125,7 @@ export default function Lotes() {
         },
         body: JSON.stringify({
           id: id, // Passa o ID do lote selecionado
-          disponivel: 2, // Marca o lote como aprovado
+          disponivel: 2, // Marca o lote como comprado
         }),
       })
         .then((response) => {
@@ -145,8 +146,8 @@ export default function Lotes() {
           console.error("Erro ao atualizar status do lote:", error);
           alert("Erro ao atualizar status do lote.");
         });
-        let novoSaldo = parseFloat(userData.saldo) - parseFloat(selectedLote.valor);
-        let saldo = parseFloat(userData.saldo) - novoSaldo;
+        let novoSaldoComprador = parseFloat(userData.saldo) - parseFloat(selectedLote.valor);
+
         // Faz uma requisição para atualizar o saldo do usuário no backend
         fetch("http://localhost:5000/api/atualizar-saldo", {
           method: "POST",
@@ -155,7 +156,7 @@ export default function Lotes() {
           },
           body: JSON.stringify({
             nome: userData.nome, // Nome do usuário
-            valor: -saldo, // Crédito recebido
+            valor: novoSaldoComprador, // Crédito perdido
           }),
         })
           .then((response) => {
@@ -165,11 +166,37 @@ export default function Lotes() {
             return response.json();
           })
           .then((updateData) => {
-            alert(updateData.mensagem); // Exibe mensagem de sucesso
+            //alert(updateData.mensagem); // Exibe mensagem de sucesso
           })
           .catch((error) => {
             console.error("Erro ao atualizar saldo:", error);
             alert("Erro ao atualizar saldo.");
+          });
+
+
+          // Faz uma requisição para atualizar o saldo do vendedor no backend
+        fetch("http://localhost:5000/api/acrescimo-saldo", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nome: selectedLote.anunciante, // Nome do vendedor
+            valor: parseFloat(selectedLote.valor), // Crédito recebido
+          }),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Erro ao atualizar o saldo do vendedor.");
+            }
+            return response.json();
+          })
+          .then((updateData) => {
+            //alert(updateData.mensagem); // Exibe mensagem de sucesso
+          })
+          .catch((error) => {
+            console.error("Erro ao atualizar saldo do vendedor:", error);
+            alert("Erro ao atualizar saldo do vendedor.");
           });
 
       alert(`Compra confirmada`);
