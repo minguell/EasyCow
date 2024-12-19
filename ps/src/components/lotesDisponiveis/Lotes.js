@@ -42,15 +42,17 @@ export default function Lotes() {
   const token = localStorage.getItem("authToken"); // Usando o nome do usuário como token aqui.
 
   useEffect(() => {
-    // if (!token) {
-    //   router.push("/"); // Redireciona para login se não autenticado
-    // } else if (token === "admin") {
-    //   setAuthStatus("admin"); // Define status como admin
-    // } else {
-    //   setAuthStatus("user"); // Define status como usuário comum
-    // }
 
-    if (authStatus === "user") {
+    if (!token) {
+      router.push("/"); // Redireciona para login se não autenticado
+    } else if (token === "admin") {
+      setAuthStatus("admin"); // Define status como admin
+    } else {
+      setAuthStatus("user"); // Define status como usuário comum
+    }
+
+
+    if (authStatus != "admin") {
     fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(token)}`)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao buscar dados do usuário");
@@ -177,7 +179,7 @@ export default function Lotes() {
     event.preventDefault();
     const formData = new FormData();
     formData.append("pesquisa", searchTerm);
-
+  
     try {
       const response = await fetch('/api/routeLotes', {
         method: 'POST',
@@ -185,111 +187,121 @@ export default function Lotes() {
       });
       if (response.ok) {
         const data = await response.json();
-
+  
         // Filtrando os lotes para exibir apenas aqueles com banner.disponivel === 1
         const availableBanners = data.filter(banner => banner.disponivel === 1);
-
-        setFilteredBanners(availableBanners); // Carrega os lotes disponíveis
-        console.log(availableBanners); // Verifique os lotes filtrados no console
+  
+        if (availableBanners.length > 0) {
+          setFilteredBanners(availableBanners); // Atualiza os lotes disponíveis
+          setError(''); // Limpa o erro, caso exista
+        } else {
+          setFilteredBanners([]); // Limpa os lotes, pois não há resultados
+          setError("Nenhum lote encontrado para a pesquisa realizada.");
+        }
       } else {
         const errorData = await response.json();
+        setFilteredBanners([]); // Limpa os lotes em caso de erro
         setError(errorData.error || "Erro ao carregar lotes");
       }
     } catch (error) {
       console.error(error);
+      setFilteredBanners([]); // Limpa os lotes em caso de erro
       setError("Erro ao conectar ao servidor");
     }
   };
+  
 
   return (
     <section id="lotes">
-      {error ? (
-        <p className={styles.error}>{error}</p>
-      ) : (
-        <div className={styles.lotesEmVenda}>
-          <div className={styles.container}>
-            <div className={styles.searchContainer}>
-              <h2>LOTES DISPONÍVEIS:</h2>
-              <form className={styles.form} onSubmit={loadLotes}>
-                <input
-                  type="text"
-                  placeholder="Pesquisar lotes..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className={styles.searchInput}
-                />
-                <button className={styles.searchButton} type="submit">Pesquisar</button>
-              </form>
-            </div>
+  <div className={styles.lotesEmVenda}>
+    <div className={styles.container}>
+      <div className={styles.searchContainer}>
+        <h2>LOTES DISPONÍVEIS:</h2>
+        <form className={styles.form} onSubmit={loadLotes}>
+          <input
+            type="text"
+            placeholder="Pesquisar lotes..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+          <button className={styles.searchButton} type="submit">
+            Pesquisar
+          </button>
+        </form>
+      </div>
 
-            <div className="row" style={{ justifyContent: 'center' }}>
-              {filteredBanners.length > 0 ? (
-                filteredBanners.map((banner) => (
-                  <button
-                    key={banner.id}
-                    className={`col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-4 ${styles.loteButton}`}
-                    onClick={() => setSelectedLote(banner)}
-                  >
-                    <div className={styles.imageWrapper}>
-                      <img
-                        src={banner.imagem}
-                        alt={`Imagem Lote ${banner.descricao}`}
-                        className={styles.bannerLote}
-                      />
-                      <div className={styles.loteTitle}>{banner.descricao}</div>
-                    </div>
-                  </button>
-                ))
-              ) : (
-                <p></p>
-              )}
+      <div className="row" style={{ justifyContent: 'center' }}>
+  {filteredBanners.length > 0 ? (
+    filteredBanners.map((banner) => (
+      <button
+        key={banner.id}
+        className={`col-6 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-4 ${styles.loteButton}`}
+        onClick={() => setSelectedLote(banner)}
+      >
+        <div className={styles.imageWrapper}>
+          <img
+            src={banner.imagem}
+            alt={`Imagem Lote ${banner.descricao}`}
+            className={styles.bannerLote}
+          />
+          <div className={styles.loteTitle}>{banner.descricao}</div>
+        </div>
+      </button>
+    ))
+  ) : (
+    !error && <p>Nenhum lote disponível para a busca realizada.</p>
+  )}
+</div>
+
+    </div>
+  </div>
+
+  {selectedLote && (
+    <div className={styles.popup}>
+      <div className={styles.popupContent}>
+        <button className={styles.closeButton} onClick={closePopup}>
+          &times;
+        </button>
+        <div className={styles.popupGrid}>
+          <div className={styles.popupImageContainer}>
+            <img
+              src={selectedLote.imagem}
+              alt={`Imagem Lote ${selectedLote}`}
+              className={styles.popupImage}
+            />
+          </div>
+          <div className={styles.popupInfo}>
+            <p><strong>Cidade:</strong> {selectedLote.cidade}</p>
+            <p><strong>Descrição:</strong> {selectedLote.descricao}</p>
+            <p><strong>Anunciante:</strong> {selectedLote.anunciante}</p>
+            <p><strong>Valor de compra:</strong> {selectedLote.valor}</p>
+            <div className={styles.rating}>
+              <strong>Índice de qualidade:</strong> {selectedLote.indice_qualidade}
+              <StarRating rating={parseFloat(selectedLote.indice_qualidade)} />
             </div>
+            {authStatus === "user" ? (
+              <button
+                className={styles.comprarButton}
+                onClick={() => setIsComprarOpen(true)}
+              >
+                Comprar
+              </button>
+            ) : (
+              <span />
+            )}
           </div>
         </div>
-      )}
+      </div>
+    </div>
+  )}
 
-      {selectedLote && (
-        <div className={styles.popup}>
-          <div className={styles.popupContent}>
-            <button className={styles.closeButton} onClick={closePopup}>
-              &times;
-            </button>
-            <div className={styles.popupGrid}>
-              <div className={styles.popupImageContainer}>
-                <img
-                  src={selectedLote.imagem}
-                  alt={`Imagem Lote ${selectedLote}`}
-                  className={styles.popupImage}
-                />
-              </div>
-              <div className={styles.popupInfo}>
-                <p><strong>Cidade:</strong> {selectedLote.cidade}</p>
-                <p><strong>Descrição:</strong> {selectedLote.descricao}</p>
-                <p><strong>Anunciante:</strong> {selectedLote.anunciante}</p>
-                <p><strong>Valor de compra:</strong> {selectedLote.valor}</p>
-                <div className={styles.rating}>
-                  <strong>Índice de qualidade:</strong> {selectedLote.indice_qualidade}
-                  <StarRating rating={parseFloat(selectedLote.indice_qualidade)} />
-                </div>
+  <Comprar
+    isOpen={isComprarOpen}
+    onClose={() => setIsComprarOpen(false)}
+    onConfirm={confirmPurchase}
+  />
+</section>
 
-                {authStatus === "user" ? <button
-                  className={styles.comprarButton}
-                  onClick={() => setIsComprarOpen(true)}
-                >
-                  Comprar
-                </button> : <span />}
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <Comprar
-        isOpen={isComprarOpen}
-        onClose={() => setIsComprarOpen(false)}
-        onConfirm={confirmPurchase}
-      />
-    </section>
   );
 }
