@@ -27,21 +27,6 @@ db.connect((err) => {
   }
 });
 
-// Rota para cadastrar usuário
-app.post('/api/usuarios', (req, res) => {
-  const { nome, email, senha } = req.body;
-  const query = 'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)';
-
-  db.query(query, [nome, email, senha], (err, results) => {
-    if (err) {
-      res.status(500).json({ mensagem: 'Erro ao cadastrar usuário', erro: err });
-    } else {
-      res.status(201).json({ mensagem: 'Usuário cadastrado com sucesso!' });
-    }
-  });
-
-  
-});
 
 // Rota para buscar informações do usuário pelo nome
 app.get('/api/usuario', (req, res) => {
@@ -147,22 +132,6 @@ app.post('/api/atualizar-disponibilidade', (req, res) => {
 });
 
 
-// Rota para cadastrar lote
-app.post('/api/lotes', (req, res) => {
-  const { nome, cidade, descrição, preço } = req.body;
-
-
-  const query = 'INSERT INTO lotes (anunciante, cidade, valor, descricao) VALUES (?, ?, ?, ?)';
-  
-  db.query(query, [nome, cidade, preço, descrição], (err, results) => {
-    if (err) {
-      res.status(500).json({ mensagem: 'Erro ao registrar lote', erro: err });
-    } else {
-      res.status(201).json({ mensagem: 'Lote registrado com sucesso!', userId: results.insertId });
-    }
-  });
-});
-
 // Rota para buscar informações de um gift card pelo código
 app.get('/api/giftcard', (req, res) => {
   const { codigo } = req.query;
@@ -188,63 +157,6 @@ app.get('/api/giftcard', (req, res) => {
 });
 
 
-app.post('/api/comprar', (req, res) => {
-  const { usuario, anunciante, data_compra } = req.query;
-
-  // Conectar ao banco de dados
-  db.getConnection((err, connection) => {
-    if (err) {
-      return res.status(500).json({ mensagem: 'Erro ao conectar ao banco de dados', erro: err });
-    }
-
-    // Iniciar transação
-    connection.beginTransaction((err) => {
-      if (err) {
-        connection.release();
-        return res.status(500).json({ mensagem: 'Erro ao iniciar transação', erro: err });
-      }
-
-      // Query para registrar a compra
-      const query = 'INSERT INTO compras (usuario, anunciante, data_compra) VALUES (?, ?, ?)';
-      connection.query(query, [usuario, anunciante, data_compra], (err, results) => {
-        if (err) {
-          return connection.rollback(() => {
-            connection.release();
-            return res.status(500).json({ mensagem: 'Erro ao registrar compra', erro: err });
-          });
-        }
-
-        // Query para atualizar a disponibilidade do lote
-        const query2 = 'UPDATE lotes SET disponivel = 2 WHERE anunciante = ?';
-        connection.query(query2, [anunciante], (err2, results2) => {
-          if (err2) {
-            return connection.rollback(() => {
-              connection.release();
-              return res.status(500).json({ mensagem: 'Erro ao atualizar disponibilidade do lote', erro: err2 });
-            });
-          }
-
-          // Se as duas queries foram bem-sucedidas, faz o commit
-          connection.commit((err3) => {
-            if (err3) {
-              return connection.rollback(() => {
-                connection.release();
-                return res.status(500).json({ mensagem: 'Erro ao confirmar transação', erro: err3 });
-              });
-            }
-
-            // Finaliza e retorna resposta
-            connection.release();
-            res.status(201).json({
-              mensagem: 'Compra registrada e disponibilidade do lote atualizada com sucesso!',
-              userId: results.insertId,
-            });
-          });
-        });
-      });
-    });
-  });
-});
 
 
 // Inicia o servidor

@@ -95,17 +95,27 @@ export default function Lotes() {
     }
     if (parseFloat(userData.saldo) >= parseFloat(selectedLote.valor)) {
       const { id } = selectedLote; // Obtém o ID do lote selecionado
-      const formData = new FormData();
-      formData.append("usuario", userData.nome);
-      formData.append("lote", selectedLote.id);
-      formData.append("data_compra", '2024-12-17'); // Corrigido
+      
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+
+      today = yyyy + '/' + mm + '/' + dd;
 
       try {
         const response = await fetch('/api/routeCompra', {
           method: 'POST',
-          body: formData,
+          headers: {
+            'Content-Type': 'application/json',  
+          },
+          body: JSON.stringify({
+            usuario: userData.nome, 
+            lote: id,               
+            data_compra: today,  
+          }),
         });
-
+      
         if (response.ok) {
           const data = await response.json();
           alert("Compra registrada com sucesso!");
@@ -117,6 +127,8 @@ export default function Lotes() {
         console.error(error);
         setError("Erro ao conectar ao servidor");
       }
+      
+
       // Atualiza o status do lote para 1 (aprovado)
       fetch("http://localhost:5000/api/atualizar-disponibilidade", {
         method: "POST",

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import styles from './Anunciados.module.css';
+import styles from './histCompras.module.css';
 
-export default function Lotes() {
+export default function histCompras() {
   const [error, setError] = useState(''); // Estado para mensagens de erro
   const [selectedLote, setSelectedLote] = useState(null);
   const [filteredBanners, setFilteredBanners] = useState([]);
