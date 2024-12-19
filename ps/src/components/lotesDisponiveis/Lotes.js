@@ -46,8 +46,6 @@ export default function Lotes() {
   useEffect(() => {
     // Carregar lotes no carregamento inicial
     loadLotes();
-  }, []);
-  useEffect(() => {
 
     if (!token) {
       router.push("/"); // Redireciona para login se não autenticado
@@ -56,9 +54,11 @@ export default function Lotes() {
     } else {
       setAuthStatus("user"); // Define status como usuário comum
     }
+  }, []);
+  useEffect(() => {
 
-
-    if (authStatus != "admin") {
+   
+    if (token != "admin") {
     fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(token)}`)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao buscar dados do usuário");
@@ -183,7 +183,7 @@ export default function Lotes() {
   // Função para carregar os lotes
   const loadLotes = async (event) => {
     if (event) event.preventDefault();
-    
+
     const formData = new FormData();
     formData.append("pesquisa", searchTerm);
   
