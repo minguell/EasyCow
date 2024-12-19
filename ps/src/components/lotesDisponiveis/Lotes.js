@@ -38,11 +38,19 @@ export default function Lotes() {
   const [isComprarOpen, setIsComprarOpen] = useState(false);
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [authStatus, setAuthStatus] = useState(null);
   const token = localStorage.getItem("authToken"); // Usando o nome do usuário como token aqui.
 
   useEffect(() => {
-    if (!token) return;
+    // if (!token) {
+    //   router.push("/"); // Redireciona para login se não autenticado
+    // } else if (token === "admin") {
+    //   setAuthStatus("admin"); // Define status como admin
+    // } else {
+    //   setAuthStatus("user"); // Define status como usuário comum
+    // }
 
+    if (authStatus === "user") {
     fetch(`http://localhost:5000/api/usuario?nome=${encodeURIComponent(token)}`)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao buscar dados do usuário");
@@ -56,6 +64,7 @@ export default function Lotes() {
         console.error(error);
         setLoading(false);
       });
+    }
   }, [token]);
 
   const closePopup = () => {
@@ -262,12 +271,14 @@ export default function Lotes() {
                   <strong>Índice de qualidade:</strong> {selectedLote.indice_qualidade}
                   <StarRating rating={parseFloat(selectedLote.indice_qualidade)} />
                 </div>
-                <button
+
+                {authStatus === "user" ? <button
                   className={styles.comprarButton}
                   onClick={() => setIsComprarOpen(true)}
                 >
                   Comprar
-                </button>
+                </button> : <span />}
+                
               </div>
             </div>
           </div>
